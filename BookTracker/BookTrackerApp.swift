@@ -11,7 +11,7 @@ import SwiftUI
 struct BookTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

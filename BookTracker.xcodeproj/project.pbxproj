@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F316E42729A6C380007C1178 /* BookTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316E42629A6C380007C1178 /* BookTrackerApp.swift */; };
-		F316E42929A6C380007C1178 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316E42829A6C380007C1178 /* ContentView.swift */; };
+		F316E42929A6C380007C1178 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316E42829A6C380007C1178 /* MainView.swift */; };
 		F316E42B29A6C381007C1178 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F316E42A29A6C381007C1178 /* Assets.xcassets */; };
 		F316E42E29A6C381007C1178 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F316E42D29A6C381007C1178 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		F316E42329A6C380007C1178 /* BookTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F316E42629A6C380007C1178 /* BookTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTrackerApp.swift; sourceTree = "<group>"; };
-		F316E42829A6C380007C1178 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F316E42829A6C380007C1178 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F316E42A29A6C381007C1178 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F316E42D29A6C381007C1178 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,8 +51,10 @@
 		F316E42529A6C380007C1178 /* BookTracker */ = {
 			isa = PBXGroup;
 			children = (
+				F316E43629A6C3AB007C1178 /* Models */,
+				F316E43529A6C3A2007C1178 /* ViewModels */,
+				F316E43429A6C397007C1178 /* Views */,
 				F316E42629A6C380007C1178 /* BookTrackerApp.swift */,
-				F316E42829A6C380007C1178 /* ContentView.swift */,
 				F316E42A29A6C381007C1178 /* Assets.xcassets */,
 				F316E42C29A6C381007C1178 /* Preview Content */,
 			);
@@ -65,6 +67,28 @@
 				F316E42D29A6C381007C1178 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F316E43429A6C397007C1178 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F316E42829A6C380007C1178 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F316E43529A6C3A2007C1178 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F316E43629A6C3AB007C1178 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F316E42929A6C380007C1178 /* ContentView.swift in Sources */,
+				F316E42929A6C380007C1178 /* MainView.swift in Sources */,
 				F316E42729A6C380007C1178 /* BookTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
