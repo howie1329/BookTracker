@@ -36,9 +36,11 @@ struct MainView: View {
                                 x: .value("Status", item.statusName),
                                 y: .value("Books" ,item.bookAmount)
                             )
+                            .foregroundStyle(Color.blue.gradient)
+                            .cornerRadius(20)
                         }
                     }
-                    .foregroundColor(Color("BlueMain"))
+                    
                     .background(Color("OffWhite"))
                     .frame(height: 175)
                     .cornerRadius(20)
