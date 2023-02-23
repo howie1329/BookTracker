@@ -21,7 +21,7 @@ struct BookTrackerApp: App {
         
         let collection = db.collection("Main")
         
-        collection.document("test123").setData(["title":"the selection","author":"howard thomas","pages":278,"status":true,"rating":3])
+        collection.document("test123").setData(["title":"the selection","author":"howard thomas","pages":278,"status":"In Progress","rating":3])
     
         
     }
@@ -48,7 +48,7 @@ struct BookTrackerApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainTabView()
                 .environmentObject(BookModel())
         }
     }

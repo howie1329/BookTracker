@@ -11,29 +11,39 @@ import Charts
 struct MainView: View {
     @EnvironmentObject var model:BookModel
     var body: some View {
-        VStack {
-            Chart{
-                ForEach(model.bookData){item in
-                    BarMark(
-                        x: .value("Status", item.statusName),
-                        y: .value("Books" ,item.bookAmount)
-                    )
+        NavigationView{
+            VStack {
+                Text("Book Tracker")
+                    .bold()
+                    .font(.title)
+                Chart{
+                    ForEach(model.bookData){item in
+                        BarMark(
+                            x: .value("Status", item.statusName),
+                            y: .value("Books" ,item.bookAmount)
+                        )
+                    }
                 }
+                .padding()
+                .frame(height: 250)
+                Text("Keep Reading")
+                    .font(.system(size: 28))
+                List(model.books){item in
+                    if item.status == "In Progress"{
+                        NavigationLink(destination: BookDetailView()) {
+                            VStack{
+                                Text(item.title.capitalized)
+                                    .bold()
+                                Text(item.author.capitalized)
+                                    .font(.caption)
+                            }
+                        }
+                    }
+                }
+                
             }
             .padding()
-            .frame(height: 250)
-            List(model.books){
-                Text($0.author)
-            }
-            Text("Hello, world!")
-            Button {
-                print(model.books)
-            } label: {
-                Text("Press Me")
-            }
-
         }
-        .padding()
     }
 }
 
