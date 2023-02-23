@@ -13,9 +13,20 @@ struct MainView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Text("Book Tracker")
-                    .bold()
-                    .font(.title)
+                HStack{
+                    Spacer()
+                    Text("Book Tracker")
+                        .bold()
+                        .font(.title)
+                        .padding(.leading,25)
+                    Spacer()
+                    Button {
+                        print("profile button")
+                    } label: {
+                        Image(systemName: "person.crop.circle.fill")
+                            .foregroundColor(.black)  
+                    }
+                }
                 Chart{
                     ForEach(model.bookData){item in
                         BarMark(
