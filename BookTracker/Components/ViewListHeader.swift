@@ -19,7 +19,7 @@ struct ViewListHeader: View {
                 .padding(.leading,25)
             Spacer()
             Button {
-                print("add book")
+                AddBookView()
             } label: {
                 Image(systemName: buttonImage)
             }
