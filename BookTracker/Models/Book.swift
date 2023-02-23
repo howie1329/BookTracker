@@ -17,3 +17,10 @@ struct Book: Hashable, Identifiable{
     var rating:Int
     
 }
+
+struct BookChart: Identifiable{
+    
+    var id = UUID()
+    var statusName:String
+    var bookAmount:Int
+}

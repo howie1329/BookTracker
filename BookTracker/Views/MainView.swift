@@ -6,17 +6,27 @@
 //
 
 import SwiftUI
+import Charts
 
 struct MainView: View {
     @EnvironmentObject var model:BookModel
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
+            Chart{
+                ForEach(model.bookData){item in
+                    BarMark(
+                        x: .value("Status", item.statusName),
+                        y: .value("Books" ,item.bookAmount)
+                    )
+                }
+            }
+            .padding()
+            .frame(height: 250)
+            List(model.books){
+                Text($0.author)
+            }
             Text("Hello, world!")
             Button {
-                model.getAllBooks()
                 print(model.books)
             } label: {
                 Text("Press Me")

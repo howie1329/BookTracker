@@ -11,6 +11,16 @@ import Firebase
 class BookModel: ObservableObject {
     
     @Published var books: [Book] = []
+    @Published var bookData: [BookChart]  =
+    [
+        BookChart(statusName: "Not Started", bookAmount: 5),
+        BookChart(statusName: "In Progress", bookAmount: 8),
+        BookChart(statusName: "Finished", bookAmount: 4)
+    ]
+    
+    init(){
+        getAllBooks()
+    }
     
     func getAllBooks(){
         
