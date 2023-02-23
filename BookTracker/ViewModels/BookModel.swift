@@ -23,7 +23,6 @@ class BookModel: ObservableObject {
     }
     
     func getAllBooks(){
-        
         let db = Firestore.firestore()
         
         let collection = db.collection("Main")
@@ -56,6 +55,33 @@ class BookModel: ObservableObject {
             }
         }
         
+    }
+    
+    func createBook(book:Book){
+        
+        let db = Firestore.firestore()
+        
+        let collection = db.collection("Main")
+        
+        collection.document().setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
+    }
+    
+    func deleteBook(id:String){
+        
+        let db = Firestore.firestore()
+        
+        let collection = db.collection("Main")
+        
+        collection.document(id).delete()
+    }
+    
+    func updateBook(book:Book){
+        
+        let db = Firestore.firestore()
+        
+        let collection = db.collection("Main")
+        
+        collection.document(book.id).setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
     }
     
 }
