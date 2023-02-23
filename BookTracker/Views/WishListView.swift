@@ -15,19 +15,15 @@ struct WishListView: View {
                 Text("Book List")
                     .bold()
                     .font(.title)
-                List(model.books){item in
-                    if item.status == "Want"{
-                        NavigationLink(destination: BookDetailView()) {
-                            HStack(spacing:90){
-                                VStack{
-                                    Text(item.title.capitalized)
-                                    Text(item.author.capitalized)
-                                        .font(.caption)
-                                }
+                List(){
+                    ForEach(model.books){ item in
+                        if item.status == "Want"{
+                            NavigationLink(destination: BookDetailView()) {
+                                BookListViewRow(item: item)
                             }
                         }
+                        
                     }
-                    
                 }
             }
             .padding()

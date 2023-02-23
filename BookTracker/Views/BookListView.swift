@@ -15,16 +15,10 @@ struct BookListView: View {
                 Text("Book List")
                     .bold()
                     .font(.title)
-                List(model.books){item in
-                    NavigationLink(destination: BookDetailView()) {
-                        HStack(spacing:70){
-                            VStack{
-                                Text(item.title.capitalized)
-                                Text(item.author.capitalized)
-                                    .font(.caption)
-                            }
-                            Text(item.status)
-                                .font(.subheadline)
+                List(){
+                    ForEach(model.books){ item in
+                        NavigationLink(destination: BookDetailView()) {
+                            BookListViewRow(item: item,showStatus: true)
                         }
                     }
                 }
