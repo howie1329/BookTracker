@@ -12,48 +12,55 @@ struct MainView: View {
     @EnvironmentObject var model:BookModel
     var body: some View {
         NavigationView{
-            VStack {
-                HStack{
-                    Spacer()
-                    Text("Book Tracker")
-                        .bold()
-                        .font(.title)
-                        .padding(.leading,25)
-                    Spacer()
-                    Button {
-                        print("profile button")
-                    } label: {
-                        Image(systemName: "person.crop.circle.fill")
-                            .foregroundColor(.black)  
+            ZStack{
+                Color("OffWhite")
+                    .ignoresSafeArea()
+                VStack {
+                    HStack{
+                        Spacer()
+                        Text("Book Tracker")
+                            .bold()
+                            .font(.title)
+                            .padding(.leading,25)
+                        Spacer()
+                        Button {
+                            print("profile button")
+                        } label: {
+                            Image(systemName: "person.crop.circle.fill")
+                                .foregroundColor(.black)
+                        }
                     }
-                }
-                Chart{
-                    ForEach(model.bookData){item in
-                        BarMark(
-                            x: .value("Status", item.statusName),
-                            y: .value("Books" ,item.bookAmount)
-                        )
+                    Chart{
+                        ForEach(model.bookData){item in
+                            BarMark(
+                                x: .value("Status", item.statusName),
+                                y: .value("Books" ,item.bookAmount)
+                            )
+                        }
                     }
-                }
-                .padding()
-                .frame(height: 250)
-                Text("Keep Reading")
-                    .font(.system(size: 28))
-                List(model.books){item in
-                    if item.status == "In Progress"{
-                        NavigationLink(destination: BookDetailView(book: item)) {
-                            VStack{
-                                Text(item.title.capitalized)
-                                    .bold()
-                                Text(item.author.capitalized)
-                                    .font(.caption)
+                    .foregroundColor(Color("BlueMain"))
+                    .background(Color("OffWhite"))
+                    .frame(height: 175)
+                    .cornerRadius(20)
+                    Text("To Read")
+                        .font(.system(size: 18))
+                    List(model.books){item in
+                        if item.status == "In Progress"{
+                            NavigationLink(destination: BookDetailView(book: item)) {
+                                VStack{
+                                    Text(item.title.capitalized)
+                                        .bold()
+                                    Text(item.author.capitalized)
+                                        .font(.caption)
+                                }
                             }
                         }
                     }
+                    .background(Color.black)
+                    
                 }
-                
+                .padding()
             }
-            .padding()
         }
     }
 }
