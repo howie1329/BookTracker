@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct BookDetailView: View {
+     var book:Book
     var body: some View {
-        Text("Book Detail")
+        NavigationView{
+            VStack(alignment:.leading){
+                VStack(alignment:.leading, spacing: 15){
+                    Text("Book Title: \(book.title)")
+                        .font(.largeTitle)
+                    Text("Author: \(book.author)")
+                        .font(.headline)
+                    Text("Pages: \(book.pages)")
+                    Text("Book Status: \(book.status)")
+                }
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("\(book.title)'s Details")
+        }
     }
 }
 
 struct BookDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BookDetailView()
+        BookDetailView(book: Book(id: "test123", title: "Test", author: "ME", pages: 234, status: "Not Started", rating: 3))
     }
 }

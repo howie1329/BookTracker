@@ -12,13 +12,11 @@ struct WishListView: View {
     var body: some View {
         NavigationView {
             VStack{
-                Text("Book List")
-                    .bold()
-                    .font(.title)
+                ViewListHeader(title: "Wish List", buttonImage: "square.grid.3x1.folder.badge.plus")
                 List(){
                     ForEach(model.books){ item in
                         if item.status == "Want"{
-                            NavigationLink(destination: BookDetailView()) {
+                            NavigationLink(destination: BookDetailView(book: item)) {
                                 BookListViewRow(item: item)
                             }
                         }

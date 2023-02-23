@@ -30,7 +30,7 @@ struct MainView: View {
                     .font(.system(size: 28))
                 List(model.books){item in
                     if item.status == "In Progress"{
-                        NavigationLink(destination: BookDetailView()) {
+                        NavigationLink(destination: BookDetailView(book: item)) {
                             VStack{
                                 Text(item.title.capitalized)
                                     .bold()

@@ -12,17 +12,16 @@ struct BookListView: View {
     var body: some View {
         NavigationView {
             VStack{
-                Text("Book List")
-                    .bold()
-                    .font(.title)
+                ViewListHeader(title: "Book List", buttonImage: "square.grid.3x1.folder.badge.plus")
                 List(){
                     ForEach(model.books){ item in
-                        NavigationLink(destination: BookDetailView()) {
+                        NavigationLink(destination: BookDetailView(book: item)) {
                             BookListViewRow(item: item,showStatus: true)
                         }
                     }
                 }
             }
+            .padding([.horizontal])
         }
         
     }
