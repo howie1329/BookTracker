@@ -13,9 +13,9 @@ class BookModel: ObservableObject {
     @Published var books: [Book] = []
     @Published var bookData: [BookChart]  =
     [
-        BookChart(statusName: "Not Started", bookAmount: 5),
-        BookChart(statusName: "In Progress", bookAmount: 8),
-        BookChart(statusName: "Finished", bookAmount: 4)
+        BookChart(statusName: "Not Started", bookAmount: 0),
+        BookChart(statusName: "In Progress", bookAmount: 0),
+        BookChart(statusName: "Finished", bookAmount: 0)
     ]
     
     init(){
@@ -46,6 +46,16 @@ class BookModel: ObservableObject {
                     let rating = data["rating"] as? Int ?? 1
                     
                     allBooks.append(Book(id: id, title: title, author: author, pages: pages, status: status, rating: rating))
+                    
+                    if status == "Not Started"{
+                        self.bookData[0].bookAmount += 1
+                    }
+                    if status == "In Progress"{
+                        self.bookData[1].bookAmount += 1
+                    }
+                    if status == "Finished"{
+                        self.bookData[2].bookAmount += 1
+                    }
                     
                 }
                 self.books = allBooks
@@ -82,6 +92,33 @@ class BookModel: ObservableObject {
         let collection = db.collection("Main")
         
         collection.document(book.id).setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
+    }
+    
+    func searchBook(){
+        
+        let urlString = "https://openlibrary.org/search/authors.json?q=j%20k%20rowling"
+        
+        let url = URL(string: urlString)
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            
+            if error == nil {
+                
+                do{
+                    print(data)
+                    print(response)
+                }catch{
+                    print(error)
+                }
+            }
+            
+        }
+        dataTask.resume()
     }
     
 }

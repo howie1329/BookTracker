@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct BookListViewRow: View {
+    @EnvironmentObject var model:BookModel
     var item:Book
     var showStatus = false
     
     var body: some View {
-        HStack(spacing:70){
+        HStack(){
             VStack{
                 Text(item.title.capitalized)
                 Text(item.author.capitalized)
                     .font(.caption)
             }
+            Spacer()
             if showStatus{
                 Text(item.status)
                     .font(.subheadline)
@@ -26,7 +28,8 @@ struct BookListViewRow: View {
         }
         .swipeActions {
             Button(role:.destructive) {
-                print("Delete")
+                model.deleteBook(id: item.id)
+                model.getAllBooks()
             } label: {
                 Label("Delete", systemImage: "trash.circle.fill")
             }

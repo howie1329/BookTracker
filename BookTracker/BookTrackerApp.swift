@@ -13,7 +13,6 @@ struct BookTrackerApp: App {
     
     init(){
         FirebaseApp.configure()
-        start()
     }
     
     func start(){
@@ -22,8 +21,6 @@ struct BookTrackerApp: App {
         let collection = db.collection("Main")
         
         collection.document("test123").setData(["title":"the selection","author":"howard thomas","pages":278,"status":"In Progress","rating":3])
-    
-        
     }
     
     func find(){

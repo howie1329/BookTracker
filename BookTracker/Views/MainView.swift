@@ -64,6 +64,9 @@ struct MainView: View {
                 .padding()
             }
         }
+        .onAppear(){
+            model.getAllBooks()
+        }
     }
 }
 
