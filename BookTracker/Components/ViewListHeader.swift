@@ -10,6 +10,7 @@ import SwiftUI
 struct ViewListHeader: View {
     var title:String
     var buttonImage:String
+    @State private var showView = false
     var body: some View {
         HStack(){
             Spacer()
@@ -19,9 +20,12 @@ struct ViewListHeader: View {
                 .padding(.leading,25)
             Spacer()
             Button {
-                AddBookView()
+                showView.toggle()
             } label: {
                 Image(systemName: buttonImage)
+                    .foregroundColor(.black)
+            }.sheet(isPresented: $showView) {
+                AddBookView()
             }
         }
     }

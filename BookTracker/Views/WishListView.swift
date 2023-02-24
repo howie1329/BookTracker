@@ -12,7 +12,7 @@ struct WishListView: View {
     var body: some View {
         NavigationView {
             VStack{
-                ViewListHeader(title: "Wish List", buttonImage: "square.grid.3x1.folder.badge.plus")
+                ViewListHeader(title: "Wish List", buttonImage: "plus")
                 List(){
                     ForEach(model.books){ item in
                         if item.status == "Want"{
@@ -24,7 +24,7 @@ struct WishListView: View {
                     }
                 }
             }
-            .padding()
+            .padding([.horizontal,.bottom])
         }
     }
 }

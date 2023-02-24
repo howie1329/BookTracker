@@ -12,7 +12,7 @@ struct BookListView: View {
     var body: some View {
         NavigationView {
             VStack{
-                ViewListHeader(title: "Book List", buttonImage: "square.grid.3x1.folder.badge.plus")
+                ViewListHeader(title: "Book List", buttonImage: "plus")
                 List(){
                     ForEach(model.books){ item in
                         NavigationLink(destination: BookDetailView(book: item)) {
@@ -21,7 +21,7 @@ struct BookListView: View {
                     }
                 }
             }
-            .padding([.horizontal])
+            .padding([.horizontal,.bottom])
         }
         
     }
