@@ -19,6 +19,7 @@ struct AddBookView: View {
     var body: some View {
         Spacer()
         VStack{
+            Text("New Book")
             Form{
                 Section(header:Text("Title")){
                     TextField("Book Title", text: $bookTitle)
