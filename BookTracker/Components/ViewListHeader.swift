@@ -25,7 +25,7 @@ struct ViewListHeader: View {
                 Image(systemName: buttonImage)
                     .foregroundColor(.black)
             }.sheet(isPresented: $showView) {
-                AddBookView()
+                AddBookView(isPresented: $showView)
             }
         }
     }

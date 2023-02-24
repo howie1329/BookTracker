@@ -50,11 +50,14 @@ class BookModel: ObservableObject {
                     if status == "Not Started"{
                         self.bookData[0].bookAmount += 1
                     }
-                    if status == "In Progress"{
+                    else if status == "In Progress"{
                         self.bookData[1].bookAmount += 1
                     }
-                    if status == "Finished"{
+                    else if status == "Finished"{
                         self.bookData[2].bookAmount += 1
+                    }
+                    else{
+                        
                     }
                     
                 }

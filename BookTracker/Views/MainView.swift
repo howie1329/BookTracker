@@ -10,6 +10,7 @@ import Charts
 
 struct MainView: View {
     @EnvironmentObject var model:BookModel
+    @State var showProfileView = false
     var body: some View {
         NavigationView{
             ZStack{
@@ -24,10 +25,12 @@ struct MainView: View {
                             .padding(.leading,25)
                         Spacer()
                         Button {
-                            print("profile button")
+                            showProfileView.toggle()
                         } label: {
                             Image(systemName: "person.crop.circle.fill")
                                 .foregroundColor(.black)
+                        }.sheet(isPresented: $showProfileView) {
+                            ProfileView()
                         }
                     }
                     Chart{

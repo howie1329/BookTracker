@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct AddBookView: View {
+    
     @EnvironmentObject var model:BookModel
+    @Binding var isPresented:Bool
     @State var bookTitle:String = ""
     @State var bookAuthor:String = ""
     @State var bookPages:Int = 0
     @State var bookStatus:String = "Not Started"
     @State var bookrating:Int = 0
     
-    private var readingStatus = ["Not Started","In Progress","Finished","Want"]
-    private var ratingNumbers = [0,1,2,3,4,5]
+    
+    
+    private let readingStatus = ["Not Started","In Progress","Finished","Want"]
+    private let ratingNumbers = [0,1,2,3,4,5]
+    
     var body: some View {
         Spacer()
         VStack{
@@ -52,6 +57,7 @@ struct AddBookView: View {
                 Button {
                     model.createBook(book: Book(id: bookTitle, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookrating))
                     model.getAllBooks()
+                    isPresented = false
                 } label: {
                     Text("Submit")
                 }
@@ -65,9 +71,3 @@ struct AddBookView: View {
     
 }
 
-struct AddBookView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddBookView()
-            .environmentObject(BookModel())
-    }
-}

@@ -20,6 +20,7 @@
 		F3949CB129A74F0200C5105C /* BookListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949CB029A74F0200C5105C /* BookListViewRow.swift */; };
 		F3A803DD29A7BC850049FA50 /* ViewListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A803DC29A7BC850049FA50 /* ViewListHeader.swift */; };
 		F3A803DF29A7F1E80049FA50 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A803DE29A7F1E80049FA50 /* AddBookView.swift */; };
+		F3A803E129A89FCD0049FA50 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A803E029A89FCD0049FA50 /* ProfileView.swift */; };
 		F3AC8A7729A6C59700BE7101 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3AC8A7629A6C59700BE7101 /* GoogleService-Info.plist */; };
 		F3ECF36229A6CA8600F290FA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F3ECF36129A6CA8600F290FA /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		F3949CB029A74F0200C5105C /* BookListViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewRow.swift; sourceTree = "<group>"; };
 		F3A803DC29A7BC850049FA50 /* ViewListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewListHeader.swift; sourceTree = "<group>"; };
 		F3A803DE29A7F1E80049FA50 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		F3A803E029A89FCD0049FA50 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F3AC8A7629A6C59700BE7101 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				F3949CAE29A7443000C5105C /* BookDetailView.swift */,
 				F3949CB029A74F0200C5105C /* BookListViewRow.swift */,
 				F3A803DE29A7F1E80049FA50 /* AddBookView.swift */,
+				F3A803E029A89FCD0049FA50 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				F316E42929A6C380007C1178 /* MainView.swift in Sources */,
 				F3949CB129A74F0200C5105C /* BookListViewRow.swift in Sources */,
 				F3A803DD29A7BC850049FA50 /* ViewListHeader.swift in Sources */,
+				F3A803E129A89FCD0049FA50 /* ProfileView.swift in Sources */,
 				F3949CAD29A741EB00C5105C /* WishListView.swift in Sources */,
 				F316E42729A6C380007C1178 /* BookTrackerApp.swift in Sources */,
 				F3949CA929A7413200C5105C /* BookListView.swift in Sources */,
