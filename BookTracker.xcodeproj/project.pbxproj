@@ -18,6 +18,9 @@
 		F3949CAD29A741EB00C5105C /* WishListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949CAC29A741EB00C5105C /* WishListView.swift */; };
 		F3949CAF29A7443000C5105C /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949CAE29A7443000C5105C /* BookDetailView.swift */; };
 		F3949CB129A74F0200C5105C /* BookListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949CB029A74F0200C5105C /* BookListViewRow.swift */; };
+		F39B723029AB46C100C660C0 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39B722F29AB46C100C660C0 /* SignIn.swift */; };
+		F39B723329AB480000C660C0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F39B723229AB480000C660C0 /* FirebaseAuth */; };
+		F39B723529AB4B1D00C660C0 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39B723429AB4B1D00C660C0 /* OnboardView.swift */; };
 		F3A803DD29A7BC850049FA50 /* ViewListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A803DC29A7BC850049FA50 /* ViewListHeader.swift */; };
 		F3A803DF29A7F1E80049FA50 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A803DE29A7F1E80049FA50 /* AddBookView.swift */; };
 		F3A803E129A89FCD0049FA50 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A803E029A89FCD0049FA50 /* ProfileView.swift */; };
@@ -38,6 +41,8 @@
 		F3949CAC29A741EB00C5105C /* WishListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListView.swift; sourceTree = "<group>"; };
 		F3949CAE29A7443000C5105C /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
 		F3949CB029A74F0200C5105C /* BookListViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewRow.swift; sourceTree = "<group>"; };
+		F39B722F29AB46C100C660C0 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
+		F39B723429AB4B1D00C660C0 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
 		F3A803DC29A7BC850049FA50 /* ViewListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewListHeader.swift; sourceTree = "<group>"; };
 		F3A803DE29A7F1E80049FA50 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		F3A803E029A89FCD0049FA50 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3ECF36229A6CA8600F290FA /* FirebaseFirestore in Frameworks */,
+				F39B723329AB480000C660C0 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +67,7 @@
 			children = (
 				F316E42529A6C380007C1178 /* BookTracker */,
 				F316E42429A6C380007C1178 /* Products */,
+				F39B723129AB480000C660C0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +105,7 @@
 		F316E43429A6C397007C1178 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F39B722C29AB469E00C660C0 /* OnBoarding */,
 				F316E42829A6C380007C1178 /* MainView.swift */,
 				F3949CA829A7413200C5105C /* BookListView.swift */,
 				F3949CAA29A7418900C5105C /* MainTabView.swift */,
@@ -126,6 +134,22 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F39B722C29AB469E00C660C0 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				F39B722F29AB46C100C660C0 /* SignIn.swift */,
+				F39B723429AB4B1D00C660C0 /* OnboardView.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		F39B723129AB480000C660C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3A803DB29A7BC6E0049FA50 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +176,7 @@
 			name = BookTracker;
 			packageProductDependencies = (
 				F3ECF36129A6CA8600F290FA /* FirebaseFirestore */,
+				F39B723229AB480000C660C0 /* FirebaseAuth */,
 			);
 			productName = BookTracker;
 			productReference = F316E42329A6C380007C1178 /* BookTracker.app */;
@@ -211,7 +236,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F39B723529AB4B1D00C660C0 /* OnboardView.swift in Sources */,
 				F3949CAF29A7443000C5105C /* BookDetailView.swift in Sources */,
+				F39B723029AB46C100C660C0 /* SignIn.swift in Sources */,
 				F316E42929A6C380007C1178 /* MainView.swift in Sources */,
 				F3949CB129A74F0200C5105C /* BookListViewRow.swift in Sources */,
 				F3A803DD29A7BC850049FA50 /* ViewListHeader.swift in Sources */,
@@ -436,6 +463,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F39B723229AB480000C660C0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3ECF36029A6CA8600F290FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		F3ECF36129A6CA8600F290FA /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F3ECF36029A6CA8600F290FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

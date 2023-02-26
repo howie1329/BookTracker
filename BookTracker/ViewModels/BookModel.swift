@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class BookModel: ObservableObject {
     
@@ -22,6 +23,9 @@ class BookModel: ObservableObject {
     @Published var progressBook:Int = 0
     @Published var notStartedBook:Int = 0
     @Published var wantBook:Int = 0
+    @Published var currentUserID:String = ""
+    @Published var signInStatus:Bool = false
+    @Published var signInError:String = ""
     
     init(){
         getAllBooks()
@@ -74,9 +78,6 @@ class BookModel: ObservableObject {
                         self.wantBook += 1
                     }
                     
-                    print(self.bookData[0].bookAmount)
-                    print(self.bookData[1].bookAmount)
-                    print(self.bookData[2].bookAmount)
                 }
                 self.books = allBooks
                 
@@ -140,5 +141,22 @@ class BookModel: ObservableObject {
         }
         dataTask.resume()
     }
+    
+    func signInUser(email:String,password:String) {
+        
+        Auth.auth().signIn(withEmail: email, password: password){result,error in
+            
+            if error == nil{
+                self.signInStatus.toggle()
+                self.currentUserID = (result?.user.uid)!
+            }
+            else{
+                self.signInError = error?.localizedDescription ?? "Email or Password was Incorrect"
+            }
+        }
+        
+    }
+    
+    
     
 }
