@@ -27,9 +27,12 @@ class BookModel: ObservableObject {
     @Published var progressBook:Int = 0
     @Published var notStartedBook:Int = 0
     @Published var wantBook:Int = 0
+    @Published var totalPagesCollected:Int = 0
+    
     @Published var currentUserID:String = ""
     @Published var signInStatus:Bool = false
     @Published var signInError:String = ""
+    
     
     @Published var signInCondition:signInState = .main
     
@@ -57,6 +60,7 @@ class BookModel: ObservableObject {
                 self.progressBook = 0
                 self.notStartedBook = 0
                 self.wantBook = 0
+                self.totalPagesCollected = 0
                 for doc in snapShot.documents{
                     let data = doc.data()
                     
@@ -69,6 +73,8 @@ class BookModel: ObservableObject {
                     let description = data["description"] as? String ?? ""
                     
                     allBooks.append(Book(id: id, title: title, author: author, pages: pages, status: status, rating: rating, description: description))
+                    
+                    self.totalPagesCollected += pages
                     
                     if status == "Not Started"{
                         self.bookData[0].bookAmount += 1
@@ -166,6 +172,19 @@ class BookModel: ObservableObject {
     
     func createUser(email:String,password:String){
         Auth.auth().createUser(withEmail: email, password: password)
+    }
+    
+    func signOutUser(){
+        do{
+            try Auth.auth().signOut()
+            self.currentUserID = ""
+            self.signInStatus.toggle()
+        }
+        catch{
+            print(error)
+        }
+        
+       
     }
     
     
