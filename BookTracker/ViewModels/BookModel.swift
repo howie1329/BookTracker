@@ -11,6 +11,10 @@ import FirebaseAuth
 
 class BookModel: ObservableObject {
     
+    enum signInState{
+        case signIn, signUp, main
+    }
+    
     @Published var books: [Book] = []
     @Published var bookData: [BookChart]  =
     [
@@ -26,6 +30,8 @@ class BookModel: ObservableObject {
     @Published var currentUserID:String = ""
     @Published var signInStatus:Bool = false
     @Published var signInError:String = ""
+    
+    @Published var signInCondition:signInState = .main
     
     init(){
         getAllBooks()
@@ -155,6 +161,10 @@ class BookModel: ObservableObject {
             }
         }
         
+    }
+    
+    func createUser(email:String,password:String){
+        Auth.auth().createUser(withEmail: email, password: password)
     }
     
     

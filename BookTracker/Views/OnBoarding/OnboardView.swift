@@ -11,21 +11,24 @@ struct OnboardView: View {
     @EnvironmentObject var model:BookModel
     @State var email:String = ""
     @State var password:String = ""
-    @State var showSignIn:Bool = false
     var body: some View {
         NavigationView {
-            if showSignIn{
-                SignIn(showSignIn: $showSignIn)
-            }else{
+            if model.signInCondition == .signIn{
+                SignIn()
+            }
+            else if model.signInCondition == .signUp{
+                SignUp()
+            }
+            else{
                 HStack(spacing:20){
                     Button {
-                        showSignIn.toggle()
-                        print("Sign In")
+                        model.signInCondition = .signIn
                     } label: {
                         Text("Sign In")
                     }
                     .buttonStyle(.borderedProminent)
                     Button {
+                        model.signInCondition = .signUp
                         print("Sign Up")
                     } label: {
                         Text("Sign Up")
@@ -40,5 +43,6 @@ struct OnboardView: View {
 struct OnboardView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardView()
+            .environmentObject(BookModel())
     }
 }

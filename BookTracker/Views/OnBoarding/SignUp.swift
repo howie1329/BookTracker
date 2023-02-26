@@ -1,5 +1,5 @@
 //
-//  SignIn.swift
+//  SignUp.swift
 //  BookTracker
 //
 //  Created by Howard Thomas on 2/26/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignIn: View {
+struct SignUp: View {
     @EnvironmentObject var model:BookModel
     @State var email:String = ""
     @State var password:String = ""
@@ -18,14 +18,14 @@ struct SignIn: View {
                 TextField("Password",text: $password)
             }
             Button {
-                model.signInUser(email: email, password: password)
+                model.createUser(email: email, password: password)
                 model.signInCondition = .main
+                
             } label: {
-                Text("Sign In")
+                Text("Sign Up")
             }
         }
-        .navigationTitle("Sign In")
-        
-        
+        .navigationTitle("Sign Up")
     }
 }
+
