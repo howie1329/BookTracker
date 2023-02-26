@@ -17,6 +17,11 @@ class BookModel: ObservableObject {
         BookChart(statusName: "In Progress", bookAmount: 0),
         BookChart(statusName: "Finished", bookAmount: 0)
     ]
+    @Published var currentRead:Int = 0
+    @Published var goal:Int = 5
+    @Published var progressBook:Int = 0
+    @Published var notStartedBook:Int = 0
+    @Published var wantBook:Int = 0
     
     init(){
         getAllBooks()
@@ -35,6 +40,13 @@ class BookModel: ObservableObject {
             else if let snapShot = snapShot {
                 
                 var allBooks : [Book] = []
+                self.bookData[0].bookAmount = 0
+                self.bookData[1].bookAmount = 0
+                self.bookData[2].bookAmount = 0
+                self.currentRead = 0
+                self.progressBook = 0
+                self.notStartedBook = 0
+                self.wantBook = 0
                 for doc in snapShot.documents{
                     let data = doc.data()
                     
@@ -49,17 +61,22 @@ class BookModel: ObservableObject {
                     
                     if status == "Not Started"{
                         self.bookData[0].bookAmount += 1
+                        self.notStartedBook += 1
                     }
                     else if status == "In Progress"{
                         self.bookData[1].bookAmount += 1
+                        self.progressBook += 1
                     }
                     else if status == "Finished"{
                         self.bookData[2].bookAmount += 1
-                    }
-                    else{
-                        
+                        self.currentRead += 1
+                    }else if status == "Want"{
+                        self.wantBook += 1
                     }
                     
+                    print(self.bookData[0].bookAmount)
+                    print(self.bookData[1].bookAmount)
+                    print(self.bookData[2].bookAmount)
                 }
                 self.books = allBooks
                 
@@ -78,7 +95,7 @@ class BookModel: ObservableObject {
         
         collection.document().setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
     }
-    
+
     func deleteBook(id:String){
         
         let db = Firestore.firestore()
