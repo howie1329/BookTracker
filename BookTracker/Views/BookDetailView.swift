@@ -19,6 +19,7 @@ struct BookDetailView: View {
                         .font(.headline)
                     Text("Pages: \(book.pages)")
                     Text("Book Status: \(book.status)")
+                    Text("Book Description: \(book.description)")
                 }
                 Spacer()
             }
@@ -30,6 +31,6 @@ struct BookDetailView: View {
 
 struct BookDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BookDetailView(book: Book(id: "test123", title: "Test", author: "ME", pages: 234, status: "Not Started", rating: 3))
+        BookDetailView(book: Book(id: "test123", title: "Test", author: "ME", pages: 234, status: "Not Started", rating: 3,description: "Great book about life"))
     }
 }

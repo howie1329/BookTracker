@@ -15,6 +15,7 @@ struct Book: Hashable, Identifiable{
     var pages:Int
     var status:String
     var rating:Int
+    var description:String
     
 }
 

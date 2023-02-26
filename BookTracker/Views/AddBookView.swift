@@ -15,7 +15,8 @@ struct AddBookView: View {
     @State var bookAuthor:String = ""
     @State var bookPages:Int = 0
     @State var bookStatus:String = "Not Started"
-    @State var bookrating:Int = 0
+    @State var bookRating:Int = 0
+    @State var bookDescription:String = ""
     
     
     
@@ -36,6 +37,9 @@ struct AddBookView: View {
                 Section(header:Text("# of Pages")){
                     TextField("Enter # Of Pages", value: $bookPages,format: .number)
                 }
+                Section(header:Text("Book Description")){
+                    TextField("What's The Book About", text: $bookDescription)
+                }
                 Section(header:Text("Reading Status")){
                     Picker("Reading Status:", selection: $bookStatus) {
                         ForEach(readingStatus, id: \.self){
@@ -44,7 +48,7 @@ struct AddBookView: View {
                     }
                 }
                 Section(header:Text("Book Rating")){
-                    Picker("Book Rating:", selection: $bookrating) {
+                    Picker("Book Rating:", selection: $bookRating) {
                         ForEach(ratingNumbers, id: \.self){
                             Text("\($0)")
                         }
@@ -55,7 +59,7 @@ struct AddBookView: View {
             HStack{
                 Spacer()
                 Button {
-                    model.createBook(book: Book(id: bookTitle, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookrating))
+                    model.createBook(book: Book(id: bookTitle, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookRating, description: bookDescription))
                     model.getAllBooks()
                     isPresented = false
                 } label: {

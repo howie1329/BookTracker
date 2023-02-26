@@ -66,8 +66,9 @@ class BookModel: ObservableObject {
                     let status = data["status"] as? String ?? ""
                     let pages = data["pages"] as? Int ?? 0
                     let rating = data["rating"] as? Int ?? 1
+                    let description = data["description"] as? String ?? ""
                     
-                    allBooks.append(Book(id: id, title: title, author: author, pages: pages, status: status, rating: rating))
+                    allBooks.append(Book(id: id, title: title, author: author, pages: pages, status: status, rating: rating, description: description))
                     
                     if status == "Not Started"{
                         self.bookData[0].bookAmount += 1
@@ -100,7 +101,7 @@ class BookModel: ObservableObject {
         
         let collection = db.collection("Main")
         
-        collection.document().setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
+        collection.document().setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating,"description":book.description])
     }
 
     func deleteBook(id:String){
