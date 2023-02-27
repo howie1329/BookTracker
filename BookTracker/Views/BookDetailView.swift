@@ -10,7 +10,6 @@ import SwiftUI
 struct BookDetailView: View {
      var book:Book
     var body: some View {
-        NavigationView{
             VStack(alignment:.leading){
                 VStack(alignment:.leading, spacing: 15){
                     Text("Book Title: \(book.title)")
@@ -25,7 +24,6 @@ struct BookDetailView: View {
             }
             .padding()
             .navigationTitle("\(book.title)'s Details")
-        }
     }
 }
 

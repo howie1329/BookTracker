@@ -11,15 +11,15 @@ struct ProfileView: View {
     @EnvironmentObject var model:BookModel
     var body: some View {
         NavigationView{
-            VStack(spacing:50){
-                Grid(alignment:.top){
+            VStack{
+                Grid(horizontalSpacing:10,verticalSpacing: 20){
                     Text("Stats")
                         .font(.title)
                     GridRow{
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
-                                .frame(width: 150,height: 150)
+                                .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
                             VStack(spacing:15){
                                 Text("Goals")
@@ -31,7 +31,7 @@ struct ProfileView: View {
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
-                                .frame(width: 150,height: 150)
+                                .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
                             VStack(spacing:15){
                                 Text("In Progress")
@@ -45,7 +45,7 @@ struct ProfileView: View {
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
-                                .frame(width: 150,height: 150)
+                                .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
                             VStack(spacing:15){
                                 Text("Need To Read")
@@ -56,10 +56,10 @@ struct ProfileView: View {
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
-                                .frame(width: 150,height: 150)
+                                .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
                             VStack(spacing:15){
-                                Text("Pages Read")
+                                Text("Pages Collected")
                                     .bold()
                                 Text("\(model.totalPagesCollected)")
                             }
@@ -69,7 +69,7 @@ struct ProfileView: View {
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
-                                .frame(width: 150,height: 150)
+                                .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
                             VStack(spacing:15){
                                 Text("Not Started")
@@ -79,15 +79,20 @@ struct ProfileView: View {
                         }
                     }
                 }
-                .navigationTitle("Profile View")
                 
+                Spacer()
+            }
+            .padding()
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Profile View")
+            .toolbar {
                 Button {
                     model.signOutUser()
                 } label: {
-                    Text("Sign Out")
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .foregroundColor(.black)
                 }
-                .buttonStyle(.borderedProminent)
-                Spacer()
+
             }
         }
     }
