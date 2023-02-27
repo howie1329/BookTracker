@@ -17,14 +17,21 @@ struct SignUp: View {
                 TextField("Email", text: $email)
                 TextField("Password",text: $password)
             }
-            Button {
-                model.createUser(email: email, password: password)
-                model.signInCondition = .main
+            HStack{
+                Button {
+                    model.createUser(email: email, password: password)
+                } label: {
+                    Text("Sign Up")
+                }.buttonStyle(.borderedProminent)
                 
-            } label: {
-                Text("Sign Up")
+                Button {
+                    model.signInCondition = .main
+                } label: {
+                    Text("Cancel")
+                }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Sign Up")
     }
 }

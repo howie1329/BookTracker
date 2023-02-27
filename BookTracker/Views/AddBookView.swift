@@ -59,7 +59,7 @@ struct AddBookView: View {
             HStack{
                 Spacer()
                 Button {
-                    model.createBook(book: Book(id: bookTitle, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookRating, description: bookDescription))
+                    model.createBook(book: Book(id: bookTitle,userID: model.currentUserID, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookRating, description: bookDescription))
                     model.getAllBooks()
                     isPresented = false
                 } label: {

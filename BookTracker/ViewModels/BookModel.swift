@@ -12,7 +12,7 @@ import FirebaseAuth
 class BookModel: ObservableObject {
     
     enum signInState{
-        case signIn, signUp, main
+        case signIn, signUp, main, inApp
     }
     
     @Published var books: [Book] = []
@@ -37,7 +37,6 @@ class BookModel: ObservableObject {
     @Published var signInCondition:signInState = .main
     
     init(){
-        getAllBooks()
     }
     
     func getAllBooks(){
@@ -64,31 +63,34 @@ class BookModel: ObservableObject {
                 for doc in snapShot.documents{
                     let data = doc.data()
                     
-                    let id = doc.documentID
-                    let title = data["title"] as? String ?? ""
-                    let author = data["author"] as? String ?? ""
-                    let status = data["status"] as? String ?? ""
-                    let pages = data["pages"] as? Int ?? 0
-                    let rating = data["rating"] as? Int ?? 1
-                    let description = data["description"] as? String ?? ""
-                    
-                    allBooks.append(Book(id: id, title: title, author: author, pages: pages, status: status, rating: rating, description: description))
-                    
-                    self.totalPagesCollected += pages
-                    
-                    if status == "Not Started"{
-                        self.bookData[0].bookAmount += 1
-                        self.notStartedBook += 1
-                    }
-                    else if status == "In Progress"{
-                        self.bookData[1].bookAmount += 1
-                        self.progressBook += 1
-                    }
-                    else if status == "Finished"{
-                        self.bookData[2].bookAmount += 1
-                        self.currentRead += 1
-                    }else if status == "Want"{
-                        self.wantBook += 1
+                    if data["userID"] as? String ?? "" == self.currentUserID {
+                        let id = doc.documentID
+                        let userID = data["userID"] as? String ?? ""
+                        let title = data["title"] as? String ?? ""
+                        let author = data["author"] as? String ?? ""
+                        let status = data["status"] as? String ?? ""
+                        let pages = data["pages"] as? Int ?? 0
+                        let rating = data["rating"] as? Int ?? 1
+                        let description = data["description"] as? String ?? ""
+                        
+                        allBooks.append(Book(id: id,userID: userID, title: title, author: author, pages: pages, status: status, rating: rating, description: description))
+                        
+                        self.totalPagesCollected += pages
+                        
+                        if status == "Not Started"{
+                            self.bookData[0].bookAmount += 1
+                            self.notStartedBook += 1
+                        }
+                        else if status == "In Progress"{
+                            self.bookData[1].bookAmount += 1
+                            self.progressBook += 1
+                        }
+                        else if status == "Finished"{
+                            self.bookData[2].bookAmount += 1
+                            self.currentRead += 1
+                        }else if status == "Want"{
+                            self.wantBook += 1
+                        }
                     }
                     
                 }
@@ -107,9 +109,9 @@ class BookModel: ObservableObject {
         
         let collection = db.collection("Main")
         
-        collection.document().setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating,"description":book.description])
+        collection.document().setData(["userID":book.userID,"title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating,"description":book.description])
     }
-
+    
     func deleteBook(id:String){
         
         let db = Firestore.firestore()
@@ -128,33 +130,6 @@ class BookModel: ObservableObject {
         collection.document(book.id).setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
     }
     
-    func searchBook(){
-        
-        let urlString = "https://openlibrary.org/search/authors.json?q=j%20k%20rowling"
-        
-        let url = URL(string: urlString)
-        
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        
-        let session = URLSession.shared
-        
-        let dataTask = session.dataTask(with: request) { (data, response, error) in
-            
-            if error == nil {
-                
-                do{
-                    print(data)
-                    print(response)
-                }catch{
-                    print(error)
-                }
-            }
-            
-        }
-        dataTask.resume()
-    }
-    
     func signInUser(email:String,password:String) {
         
         Auth.auth().signIn(withEmail: email, password: password){result,error in
@@ -162,6 +137,7 @@ class BookModel: ObservableObject {
             if error == nil{
                 self.signInStatus.toggle()
                 self.currentUserID = (result?.user.uid)!
+                self.signInCondition = .inApp
             }
             else{
                 self.signInError = error?.localizedDescription ?? "Email or Password was Incorrect"
@@ -172,6 +148,7 @@ class BookModel: ObservableObject {
     
     func createUser(email:String,password:String){
         Auth.auth().createUser(withEmail: email, password: password)
+        self.signInCondition = .main
     }
     
     func signOutUser(){
@@ -179,12 +156,13 @@ class BookModel: ObservableObject {
             try Auth.auth().signOut()
             self.currentUserID = ""
             self.signInStatus.toggle()
+            self.signInCondition = .main
         }
         catch{
             print(error)
         }
         
-       
+        
     }
     
     

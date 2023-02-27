@@ -10,6 +10,7 @@ import Foundation
 struct Book: Hashable, Identifiable{
     
     var id:String
+    var userID:String
     var title:String
     var author:String
     var pages:Int

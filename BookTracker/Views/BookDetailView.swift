@@ -29,6 +29,6 @@ struct BookDetailView: View {
 
 struct BookDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BookDetailView(book: Book(id: "test123", title: "Test", author: "ME", pages: 234, status: "Not Started", rating: 3,description: "Great book about life"))
+        BookDetailView(book: Book(id: "test123",userID: "test", title: "Test", author: "ME", pages: 234, status: "Not Started", rating: 3,description: "Great book about life"))
     }
 }

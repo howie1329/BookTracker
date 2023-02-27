@@ -19,6 +19,9 @@ struct OnboardView: View {
             else if model.signInCondition == .signUp{
                 SignUp()
             }
+            else if model.signInCondition == .inApp{
+                MainTabView()
+            }
             else{
                 HStack(spacing:20){
                     Button {
