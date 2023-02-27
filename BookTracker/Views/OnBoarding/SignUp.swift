@@ -16,10 +16,21 @@ struct SignUp: View {
     var body: some View {
         VStack{
             Form{
-                TextField("First Name",text: $name)
-                TextField("Email", text: $email)
-                TextField("Password",text: $password)
-                TextField("Book Goal",value: $bookGoal,format: .number)
+                Section{
+                    TextField("First Name",text: $name)
+                    TextField("Book Goal",value: $bookGoal,format: .number)
+                } header: {
+                    Text("Start Here")
+                }
+                
+                Section{
+                    TextField("Email", text: $email)
+                    SecureField("Password",text: $password)
+                } header: {
+                    Text("Important Info")
+                }
+                
+                
             }
             HStack{
                 Button {

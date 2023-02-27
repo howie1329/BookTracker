@@ -14,8 +14,13 @@ struct SignIn: View {
     var body: some View {
         VStack{
             Form{
-                TextField("Email", text: $email)
-                TextField("Password",text: $password)
+                Section{
+                    TextField("Email", text: $email)
+                    SecureField("Password",text: $password)
+                } header: {
+                    Text("Start Here")
+                }
+               
             }
             HStack{
                 Button {
@@ -37,3 +42,5 @@ struct SignIn: View {
         
     }
 }
+
+
