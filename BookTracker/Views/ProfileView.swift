@@ -77,6 +77,17 @@ struct ProfileView: View {
                                 Text("\(model.notStartedBook)")
                             }
                         }
+                        ZStack{
+                            Rectangle()
+                                .cornerRadius(20)
+                                .frame(width: 170,height: 150)
+                                .foregroundColor(.gray)
+                            VStack(spacing:15){
+                                Text("Avg. Rating")
+                                    .bold()
+                                Text("\(model.avgBookRating)")
+                            }
+                        }
                     }
                 }
                 

@@ -29,6 +29,7 @@ class BookModel: ObservableObject {
     @Published var wantBook:Int = 0
     @Published var totalPagesCollected:Int = 0
     
+    @Published var avgBookRating:Int = 0
     @Published var currentUserID:String = ""
     @Published var signInStatus:Bool = false
     @Published var signInError:String = ""
@@ -53,6 +54,8 @@ class BookModel: ObservableObject {
             else if let snapShot = snapShot {
                 
                 var allBooks : [Book] = []
+                var ratingTotal: Int = 0
+                var totalbooks: Int = 0
                 self.bookData[0].bookAmount = 0
                 self.bookData[1].bookAmount = 0
                 self.bookData[2].bookAmount = 0
@@ -78,6 +81,9 @@ class BookModel: ObservableObject {
                         
                         self.totalPagesCollected += pages
                         
+                        ratingTotal += rating
+                        totalbooks += 1
+                        
                         if status == "Not Started"{
                             self.bookData[0].bookAmount += 1
                             self.notStartedBook += 1
@@ -96,6 +102,13 @@ class BookModel: ObservableObject {
                     
                 }
                 self.books = allBooks
+                if totalbooks != 0 {
+                    self.avgBookRating = ratingTotal/totalbooks
+                }
+                else{
+                    self.avgBookRating = 0
+                }
+                
                 
             } else{
                 print("no data")
@@ -128,7 +141,7 @@ class BookModel: ObservableObject {
         
         let collection = db.collection("Main")
         
-        collection.document(book.id).setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating])
+        collection.document(book.id).setData(["title":book.title,"author":book.author,"pages":book.pages,"status":book.status,"rating":book.rating,"description":book.description,"userID":book.userID])
     }
     
     func signInUser(email:String,password:String) {

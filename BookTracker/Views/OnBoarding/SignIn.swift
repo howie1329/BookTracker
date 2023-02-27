@@ -16,7 +16,7 @@ struct SignIn: View {
             Form{
                 Section{
                     TextField("Email", text: $email)
-                    SecureField("Password",text: $password)
+                    TextField("Password",text: $password)
                 } header: {
                     Text("Start Here")
                 }
