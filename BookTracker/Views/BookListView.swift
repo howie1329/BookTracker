@@ -9,10 +9,11 @@ import SwiftUI
 
 struct BookListView: View {
     @EnvironmentObject var model:BookModel
+    @State var showView = false
+    
     var body: some View {
         NavigationView {
             VStack{
-                ViewListHeader(title: "Book List", buttonImage: "plus")
                 List(){
                     ForEach(model.books){ item in
                         NavigationLink(destination: BookDetailView(book: item)) {
@@ -21,7 +22,18 @@ struct BookListView: View {
                     }
                 }
             }
-            .padding([.horizontal,.bottom])
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Book List")
+            .toolbar{
+                Button {
+                    showView.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(.black)
+                }.sheet(isPresented: $showView) {
+                    AddBookView(isPresented: $showView)
+                }
+            }
         }
         
     }

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct WishListView: View {
     @EnvironmentObject var model:BookModel
+    @State var showView = false
     var body: some View {
         NavigationView {
             VStack{
-                ViewListHeader(title: "Wish List", buttonImage: "plus")
                 List(){
                     ForEach(model.books){ item in
                         if item.status == "Want"{
@@ -24,7 +24,18 @@ struct WishListView: View {
                     }
                 }
             }
-            .padding([.horizontal,.bottom])
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("Wish List")
+            .toolbar{
+                Button {
+                    showView.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                        .foregroundColor(.black)
+                }.sheet(isPresented: $showView) {
+                    AddBookView(isPresented: $showView)
+                }
+            }
         }
     }
 }
