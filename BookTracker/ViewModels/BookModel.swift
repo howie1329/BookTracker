@@ -23,7 +23,7 @@ class BookModel: ObservableObject {
         BookChart(statusName: "Finished", bookAmount: 0)
     ]
     @Published var currentRead:Int = 0
-    @Published var goal:Int = 5
+    @Published var goal:Int = 0
     @Published var progressBook:Int = 0
     @Published var notStartedBook:Int = 0
     @Published var wantBook:Int = 0
@@ -32,6 +32,7 @@ class BookModel: ObservableObject {
     @Published var currentUserID:String = ""
     @Published var signInStatus:Bool = false
     @Published var signInError:String = ""
+    @Published var currentUserName:String = ""
     
     
     @Published var signInCondition:signInState = .main
@@ -138,6 +139,27 @@ class BookModel: ObservableObject {
                 self.signInStatus.toggle()
                 self.currentUserID = (result?.user.uid)!
                 self.signInCondition = .inApp
+                
+                let db = Firestore.firestore()
+                let collection = db.collection("Users")
+                collection.getDocuments { (snapShot, error) in
+                    
+                    if let error = error{
+                        print(error.localizedDescription)
+                    } else if let snapShot = snapShot {
+                        for doc in snapShot.documents{
+                            
+                            let data = doc.data()
+                            
+                            if data["email"] as! String == email{
+                                self.goal = data["goal"] as? Int ?? 0
+                                self.currentUserName = data["name"] as? String ?? ""
+                            }
+                        }
+                    }
+                    
+                }
+                
             }
             else{
                 self.signInError = error?.localizedDescription ?? "Email or Password was Incorrect"
@@ -146,9 +168,13 @@ class BookModel: ObservableObject {
         
     }
     
-    func createUser(email:String,password:String){
+    func createUser(email:String,password:String, user:User){
         Auth.auth().createUser(withEmail: email, password: password)
         self.signInCondition = .main
+        
+        let db = Firestore.firestore()
+        let collection = db.collection("Users")
+        collection.document().setData(["name":user.name,"goal":user.bookGoal,"email":user.email])
     }
     
     func signOutUser(){

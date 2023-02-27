@@ -10,7 +10,7 @@ import Charts
 
 struct MainView: View {
     @EnvironmentObject var model:BookModel
-    let bookShowOptions = ["Not Started","In Progress","Finished"]
+    let bookShowOptions = ["In Progress","Finished"]
     @State var showProfileView = false
     @State var listBookshow = "In Progress"
     

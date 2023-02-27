@@ -84,7 +84,7 @@ struct ProfileView: View {
             }
             .padding()
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Profile View")
+            .navigationTitle("\(model.currentUserName)'s Profile")
             .toolbar {
                 Button {
                     model.signOutUser()
