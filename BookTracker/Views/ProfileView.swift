@@ -12,15 +12,16 @@ struct ProfileView: View {
     var body: some View {
         NavigationView{
             VStack{
+                Text("Stats")
+                    .font(.largeTitle)
                 Grid(horizontalSpacing:10,verticalSpacing: 20){
-                    Text("Stats")
-                        .font(.title)
                     GridRow{
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
                                 .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                             VStack(spacing:15){
                                 Text("Goals")
                                     .bold()
@@ -33,6 +34,7 @@ struct ProfileView: View {
                                 .cornerRadius(20)
                                 .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                             VStack(spacing:15){
                                 Text("In Progress")
                                     .bold()
@@ -41,12 +43,14 @@ struct ProfileView: View {
                         }
                         
                     }
+                    
                     GridRow{
                         ZStack{
                             Rectangle()
                                 .cornerRadius(20)
                                 .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                             VStack(spacing:15){
                                 Text("Need To Read")
                                     .bold()
@@ -58,6 +62,7 @@ struct ProfileView: View {
                                 .cornerRadius(20)
                                 .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                             VStack(spacing:15){
                                 Text("Pages Collected")
                                     .bold()
@@ -71,6 +76,7 @@ struct ProfileView: View {
                                 .cornerRadius(20)
                                 .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                             VStack(spacing:15){
                                 Text("Not Started")
                                     .bold()
@@ -82,6 +88,7 @@ struct ProfileView: View {
                                 .cornerRadius(20)
                                 .frame(width: 170,height: 150)
                                 .foregroundColor(.gray)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                             VStack(spacing:15){
                                 Text("Avg. Rating")
                                     .bold()

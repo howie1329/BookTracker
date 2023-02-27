@@ -11,6 +11,9 @@ struct OnboardView: View {
     @EnvironmentObject var model:BookModel
     @State var email:String = ""
     @State var password:String = ""
+    
+    let tabPic = ["test1","test2","test3"]
+    
     var body: some View {
         NavigationView {
             if model.signInCondition == .signIn{
@@ -23,20 +26,44 @@ struct OnboardView: View {
                 MainTabView()
             }
             else{
-                HStack(spacing:20){
-                    Button {
-                        model.signInCondition = .signIn
-                    } label: {
-                        Text("Sign In")
+                VStack{
+                    Text("Home Library Tracker")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top,50)
+                    TabView {
+                        ForEach(tabPic,id: \.self){item in
+                            ZStack{
+                                Rectangle()
+                                    .foregroundColor(.gray)
+                                VStack{
+                                    Text(item)
+                                }
+                                
+                            }
+                            .frame(width:350,height: 500)
+                            .cornerRadius(20)
+                            .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                            
+                        }
                     }
-                    .buttonStyle(.borderedProminent)
-                    Button {
-                        model.signInCondition = .signUp
-                        print("Sign Up")
-                    } label: {
-                        Text("Sign Up")
+                    .tabViewStyle(.page)
+                    HStack(spacing:20){
+                        Button {
+                            model.signInCondition = .signIn
+                        } label: {
+                            Text("Sign In")
+                                .frame(width: 100)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        Button {
+                            model.signInCondition = .signUp
+                            print("Sign Up")
+                        } label: {
+                            Text("Sign Up")
+                        }
+                        .buttonStyle(.borderless)
                     }
-                    .buttonStyle(.borderedProminent)
                 }
             }
         }
