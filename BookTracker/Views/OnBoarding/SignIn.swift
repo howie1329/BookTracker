@@ -13,35 +13,43 @@ struct SignIn: View {
     @State var password:String = ""
     @Binding var signInStatus:Bool
     var body: some View {
-        VStack{
-            Form{
-                Section{
-                    TextField("Email", text: $email)
-                    TextField("Password",text: $password)
-                } header: {
-                    Text("Start Here")
+        NavigationView{
+            VStack{
+                Form{
+                    Section{
+                        TextField("Email", text: $email)
+                        TextField("Password",text: $password)
+                    } header: {
+                        Text("Start Here")
+                    }
+                    
                 }
-               
+                HStack{
+                    Spacer()
+                    
+                    Button {
+                        model.signInUser(email: email, password: password)
+                    } label: {
+                        Text("Sign In")
+                    }.buttonStyle(.borderedProminent)
+                    
+                   Spacer()
+                }
             }
-            HStack{
-                Button {
-                    model.signInUser(email: email, password: password)
-                } label: {
-                    Text("Sign In")
-                }.buttonStyle(.borderedProminent)
-                
+            .toolbar{
                 Button {
                     model.signInCondition = .main
                     signInStatus = false
                 } label: {
-                    Text("Cancel")
+                    Image(systemName: "x.circle")
+                        .tint(.gray)
                 }
+
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Sign In")
+            
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle("Sign In")
-        
-        
     }
 }
 
