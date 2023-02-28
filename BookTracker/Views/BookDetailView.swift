@@ -56,6 +56,17 @@ struct BookDetailView: View {
                     Text("Book Status: \(book.status)")
                     Text("Book Rating: \(book.rating)")
                     Text("Book Description: \(book.description)")
+                    
+                    Button {
+                        print("Edit Mode")
+                        editPages = book.pages
+                        editStatus = book.status
+                        editRating = book.rating
+                        editDescription = book.description
+                        editMode.toggle()
+                    } label: {
+                        Text("Edit Book Info.")
+                    }
                 }
                 
                 
@@ -65,19 +76,6 @@ struct BookDetailView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("\(book.title)'s Details")
-        .toolbar{
-            Button {
-                print("Edit Mode")
-                editPages = book.pages
-                editStatus = book.status
-                editRating = book.rating
-                editDescription = book.description
-                editMode.toggle()
-            } label: {
-                Image(systemName: "pencil")
-            }
-            
-        }
     }
 }
 

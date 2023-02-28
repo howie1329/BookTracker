@@ -11,14 +11,27 @@ struct BookListView: View {
     @EnvironmentObject var model:BookModel
     @State var showView = false
     
+    @State var showDetail = false
+    
+    @State var presentationDetents = PresentationDetent.medium
+    
     var body: some View {
         NavigationView {
             VStack{
                 List(){
                     ForEach(model.books){ item in
-                        NavigationLink(destination: BookDetailView(book: item)) {
+                        Button {
+                            showDetail.toggle()
+                        } label: {
                             BookListViewRow(item: item,showStatus: true)
                         }
+                        .sheet(isPresented: $showDetail) {
+                            BookDetailView(book: item)
+                                .presentationDetents([.medium,.large], selection: $presentationDetents)
+                        }
+                        
+                        
+                        
                     }
                 }
             }
