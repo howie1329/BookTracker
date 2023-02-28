@@ -12,20 +12,20 @@ struct OnboardView: View {
     @State var email:String = ""
     @State var password:String = ""
     
+    @State var showLoginView = false
+    @State var showSignupView = false
+    
+    @State var loginViewPresentationDetent = PresentationDetent.medium
+    @State var signupViewPresentationDetent = PresentationDetent.medium
+    
     let tabPic = ["test1","test2","test3"]
     
     var body: some View {
         NavigationView {
-            if model.signInCondition == .signIn{
-                SignIn()
-            }
-            else if model.signInCondition == .signUp{
-                SignUp()
-            }
-            else if model.signInCondition == .inApp{
+            if model.signInCondition == .inApp{
                 MainTabView()
             }
-            else{
+            else if model.signInCondition == .main{
                 VStack{
                     Text("Home Library Tracker")
                         .font(.largeTitle)
@@ -50,19 +50,27 @@ struct OnboardView: View {
                     .tabViewStyle(.page)
                     HStack(spacing:20){
                         Button {
-                            model.signInCondition = .signIn
+                            showLoginView.toggle()
                         } label: {
                             Text("Sign In")
                                 .frame(width: 100)
                         }
                         .buttonStyle(.borderedProminent)
+                        .sheet(isPresented: $showLoginView) {
+                            SignIn(signInStatus: $showLoginView)
+                                .presentationDetents([.medium], selection: $loginViewPresentationDetent)
+                        }
+                        
                         Button {
-                            model.signInCondition = .signUp
-                            print("Sign Up")
+                            showSignupView.toggle()
                         } label: {
                             Text("Sign Up")
                         }
                         .buttonStyle(.borderless)
+                        .sheet(isPresented: $showSignupView) {
+                            SignUp(signUpStatus: $showSignupView)
+                                .presentationDetents([.medium,.large], selection: $signupViewPresentationDetent)
+                        }
                     }
                 }
             }

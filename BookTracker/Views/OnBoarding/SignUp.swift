@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SignUp: View {
     @EnvironmentObject var model:BookModel
+    
+    @Binding var signUpStatus: Bool
+    
     @State var email:String = ""
     @State var password:String = ""
     @State var name:String = ""
@@ -41,6 +44,7 @@ struct SignUp: View {
                 
                 Button {
                     model.signInCondition = .main
+                    signUpStatus = false
                 } label: {
                     Text("Cancel")
                 }

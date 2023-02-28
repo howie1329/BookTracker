@@ -11,6 +11,7 @@ struct SignIn: View {
     @EnvironmentObject var model:BookModel
     @State var email:String = ""
     @State var password:String = ""
+    @Binding var signInStatus:Bool
     var body: some View {
         VStack{
             Form{
@@ -31,6 +32,7 @@ struct SignIn: View {
                 
                 Button {
                     model.signInCondition = .main
+                    signInStatus = false
                 } label: {
                     Text("Cancel")
                 }
