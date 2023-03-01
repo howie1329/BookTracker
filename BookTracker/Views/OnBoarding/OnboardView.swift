@@ -54,7 +54,9 @@ struct OnboardView: View {
                         } label: {
                             Text("Sign In")
                                 .frame(width: 100)
+                                .foregroundColor(.white)
                         }
+                        .foregroundColor(Color("BlueMain"))
                         .buttonStyle(.borderedProminent)
                         .sheet(isPresented: $showLoginView) {
                             SignIn(signInStatus: $showLoginView)
@@ -66,7 +68,7 @@ struct OnboardView: View {
                         } label: {
                             Text("Sign Up")
                         }
-                        .buttonStyle(.borderless)
+                        .buttonStyle(.borderedProminent)
                         .sheet(isPresented: $showSignupView) {
                             SignUp(signUpStatus: $showSignupView)
                                 .presentationDetents([.medium,.large], selection: $signupViewPresentationDetent)

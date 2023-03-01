@@ -32,14 +32,31 @@ struct BookDetailView: View {
                 if editMode{
                     VStack{
                         Form{
-                            TextField("Pages", value: $editPages, format:.number)
-                            Picker("Status", selection: $editStatus) {
-                                ForEach(readingStatus, id: \.self){item in
-                                    Text(item)
-                                }
-                            }.pickerStyle(.segmented)
-                            Stepper("Rating: \(editRating)", value: $editRating,in: 0...5)
-                            TextField("Description", text: $editDescription)
+                            Section{
+                                TextField("Pages", value: $editPages, format:.number)
+                            } header: {
+                                Text("Pages")
+                            }
+                            Section{
+                                Picker("Status", selection: $editStatus) {
+                                    ForEach(readingStatus, id: \.self){item in
+                                        Text(item)
+                                    }
+                                }.pickerStyle(.segmented)
+                            } header: {
+                                Text("Book Status")
+                            }
+                            
+                            Section{
+                                Stepper("Rating: \(editRating)", value: $editRating,in: 0...5)
+                            } header: {
+                                Text("Book Rating")
+                            }
+                            Section{
+                                TextField("Description", text: $editDescription)
+                            } header: {
+                                Text("Book Description")
+                            }
                         }
                         Button {
                             model.updateBook(book: Book(id: book.id, userID: model.currentUserID, title: book.title, author: book.author, pages: editPages, status: editStatus, rating: editRating, description: editDescription))
@@ -52,20 +69,22 @@ struct BookDetailView: View {
                     }
                     
                 }else{
-                    Text("Pages: \(book.pages)")
-                    Text("Book Status: \(book.status)")
-                    Text("Book Rating: \(book.rating)")
-                    Text("Book Description: \(book.description)")
-                    
-                    Button {
-                        print("Edit Mode")
-                        editPages = book.pages
-                        editStatus = book.status
-                        editRating = book.rating
-                        editDescription = book.description
-                        editMode.toggle()
-                    } label: {
-                        Text("Edit Book Info.")
+                    VStack(alignment:.center,spacing: 15){
+                        VStack(alignment:.leading,spacing:15){
+                            Text("Pages: \(book.pages)")
+                            Text("Book Status: \(book.status)")
+                            Text("Book Rating: \(book.rating)")
+                            Text("Book Description: \(book.description)")
+                        }
+                        Button {
+                            editPages = book.pages
+                            editStatus = book.status
+                            editRating = book.rating
+                            editDescription = book.description
+                            editMode.toggle()
+                        } label: {
+                            Text("Edit Book")
+                        }
                     }
                 }
                 

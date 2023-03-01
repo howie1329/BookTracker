@@ -31,7 +31,9 @@ struct SignIn: View {
                         model.signInUser(email: email, password: password)
                     } label: {
                         Text("Sign In")
-                    }.buttonStyle(.borderedProminent)
+                    }
+                    .foregroundColor(Color("BlueMain"))
+                    .buttonStyle(.borderedProminent)
                     
                    Spacer()
                 }
@@ -42,7 +44,7 @@ struct SignIn: View {
                     signInStatus = false
                 } label: {
                     Image(systemName: "x.circle")
-                        .tint(.gray)
+                        .tint(.black)
                 }
 
             }
