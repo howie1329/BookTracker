@@ -17,34 +17,44 @@ struct BookListView: View {
     
     var body: some View {
         NavigationView {
-            VStack{
-                List(){
-                    ForEach(model.books){ item in
-                        Button {
-                            showDetail.toggle()
-                        } label: {
-                            BookListViewRow(item: item,showStatus: true)
+            ZStack{
+                Color("Primary")
+                    .ignoresSafeArea()
+                VStack{
+                    List(){
+                        ForEach(model.books){ item in
+                            Button {
+                                showDetail.toggle()
+                            } label: {
+                                BookListViewRow(item: item,showStatus: true)
+                            }
+                            .sheet(isPresented: $showDetail) {
+                                BookDetailView(book: item)
+                                    .presentationDetents([.medium,.large], selection: $presentationDetents)
+                            }
+                            
+                            
+                            
                         }
-                        .sheet(isPresented: $showDetail) {
-                            BookDetailView(book: item)
-                                .presentationDetents([.medium,.large], selection: $presentationDetents)
-                        }
-                        
-                        
-                        
                     }
+                    .scrollContentBackground(.hidden)
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Book List")
-            .toolbar{
-                Button {
-                    showView.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(.black)
-                }.sheet(isPresented: $showView) {
-                    AddBookView(isPresented: $showView)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    HStack(spacing:100){
+                        Text("Book List")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .bold()
+                        Button {
+                            showView.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                        }.sheet(isPresented: $showView) {
+                            AddBookView(isPresented: $showView)
+                        }
+                    }
                 }
             }
         }

@@ -18,48 +18,58 @@ struct SignUp: View {
     @State var bookGoal:Int = 0
     var body: some View {
         NavigationView{
-            VStack{
-                Form{
-                    Section{
-                        TextField("First Name",text: $name)
-                        TextField("Book Goal",value: $bookGoal,format: .number)
-                    } header: {
-                        Text("Start Here")
+            ZStack{
+                Color("Third")
+                    .ignoresSafeArea()
+                VStack{
+                    Form{
+                        Section{
+                            TextField("First Name",text: $name)
+                        } header: {
+                            Text("Start Here")
+                        }
+                        
+                        Section{
+                            TextField("Book Goal",value: $bookGoal,format: .number)
+                        } header: {
+                            Text("Book Goal")
+                        }
+                        
+                        Section{
+                            TextField("Email", text: $email)
+                            TextField("Password",text: $password)
+                        } header: {
+                            Text("Important Info")
+                        }
                     }
-                    
-                    Section{
-                        TextField("Email", text: $email)
-                        TextField("Password",text: $password)
-                    } header: {
-                        Text("Important Info")
+                    .scrollContentBackground(.hidden)
+                    HStack{
+                        Spacer()
+                        Button {
+                            model.createUser(email: email, password: password,user: User(id: name, name: name, bookGoal: bookGoal,email: email))
+                        } label: {
+                            Text("Sign Up")
+                                .foregroundColor(Color("Third"))
+                        }.buttonStyle(.borderedProminent)
+                        
+                        Spacer()
+                        
                     }
-                    
-                    
                 }
-                HStack{
-                    Spacer()
+                .toolbar{
                     Button {
-                        model.createUser(email: email, password: password,user: User(id: name, name: name, bookGoal: bookGoal,email: email))
+                        model.signInCondition = .main
+                        signUpStatus = false
                     } label: {
-                        Text("Sign Up")
-                    }.buttonStyle(.borderedProminent)
-                    
-                    Spacer()
+                        Image(systemName: "x.circle")
+                            .tint(Color("Third"))
+                    }
                     
                 }
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Sign Up")
+                .foregroundColor(.white)
             }
-            .toolbar{
-                Button {
-                    model.signInCondition = .main
-                    signUpStatus = false
-                } label: {
-                    Image(systemName: "x.circle")
-                        .tint(.gray)
-                }
-
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Sign Up")
         }
     }
 }

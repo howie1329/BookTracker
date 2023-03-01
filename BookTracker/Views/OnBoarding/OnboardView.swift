@@ -22,56 +22,63 @@ struct OnboardView: View {
     
     var body: some View {
         NavigationView {
-            if model.signInCondition == .inApp{
-                MainTabView()
-            }
-            else if model.signInCondition == .main{
-                VStack{
-                    Text("Home Library Tracker")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top,50)
-                    TabView {
-                        ForEach(tabPic,id: \.self){item in
-                            ZStack{
-                                Rectangle()
-                                    .foregroundColor(.gray)
-                                VStack{
-                                    Text(item)
+            ZStack{
+                Color("Primary")
+                    .ignoresSafeArea()
+                if model.signInCondition == .inApp{
+                    MainTabView()
+                }
+                else if model.signInCondition == .main{
+                    VStack{
+                        Text("Home Library Tracker")
+                            .foregroundColor(.white)
+                            .font(.largeTitle)
+                            .bold()
+                            .padding(.top,50)
+                        TabView {
+                            ForEach(tabPic,id: \.self){item in
+                                ZStack{
+                                    Rectangle()
+                                        .foregroundColor(.gray)
+                                    VStack{
+                                        Text(item)
+                                    }
+                                    
                                 }
+                                .frame(width:350,height: 500)
+                                .cornerRadius(20)
+                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
                                 
                             }
-                            .frame(width:350,height: 500)
-                            .cornerRadius(20)
-                            .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                        }
+                        .tabViewStyle(.page)
+                        HStack(spacing:20){
+                            Button {
+                                showLoginView.toggle()
+                            } label: {
+                                Text("Sign In")
+                                    .frame(width: 100)
+                                    .foregroundColor(.black)
+                            }
+                            .tint(Color.white)
+                            .buttonStyle(.borderedProminent)
+                            .sheet(isPresented: $showLoginView) {
+                                SignIn(signInStatus: $showLoginView)
+                                    .presentationDetents([.medium], selection: $loginViewPresentationDetent)
+                            }
                             
-                        }
-                    }
-                    .tabViewStyle(.page)
-                    HStack(spacing:20){
-                        Button {
-                            showLoginView.toggle()
-                        } label: {
-                            Text("Sign In")
-                                .frame(width: 100)
-                                .foregroundColor(.white)
-                        }
-                        .foregroundColor(Color("BlueMain"))
-                        .buttonStyle(.borderedProminent)
-                        .sheet(isPresented: $showLoginView) {
-                            SignIn(signInStatus: $showLoginView)
-                                .presentationDetents([.medium], selection: $loginViewPresentationDetent)
-                        }
-                        
-                        Button {
-                            showSignupView.toggle()
-                        } label: {
-                            Text("Sign Up")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .sheet(isPresented: $showSignupView) {
-                            SignUp(signUpStatus: $showSignupView)
-                                .presentationDetents([.medium,.large], selection: $signupViewPresentationDetent)
+                            Button {
+                                showSignupView.toggle()
+                            } label: {
+                                Text("Sign Up")
+                                    .foregroundColor(.black)
+                            }
+                            .tint(Color.white)
+                            .buttonStyle(.borderedProminent)
+                            .sheet(isPresented: $showSignupView) {
+                                SignUp(signUpStatus: $showSignupView)
+                                    .presentationDetents([.medium,.large], selection: $signupViewPresentationDetent)
+                            }
                         }
                     }
                 }

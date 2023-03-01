@@ -14,12 +14,15 @@ struct MainView: View {
     @State var showProfileView = false
     @State var listBookshow = "In Progress"
     
+    @State var showDetail = false
+    @State var presentationDetents = PresentationDetent.medium
+    
     var body: some View {
         NavigationView{
             ZStack{
-                Color("OffWhite")
+                Color("Primary")
                     .ignoresSafeArea()
-                VStack {
+                VStack(spacing:25) {
                     VStack{
                         Chart{
                             ForEach(model.bookData){item in
@@ -27,18 +30,19 @@ struct MainView: View {
                                     x: .value("Status", item.statusName),
                                     y: .value("Books" ,item.bookAmount)
                                 )
-                                .foregroundStyle(Color.blue.gradient)
+                                .foregroundStyle(Color.white.gradient)
                                 .cornerRadius(20)
                             }
                         }
-                        .background(Color("OffWhite"))
+                        .background(Color("Third"))
                         .frame(height: 200)
                         .cornerRadius(20)
-                        .padding(.bottom)
                     }
                     VStack{
                         Text("To Read")
-                            .font(.system(size: 18))
+                            .foregroundColor(Color.white)
+                            .font(.title3)
+                            .bold()
                         Picker("Books", selection: $listBookshow) {
                             ForEach(bookShowOptions, id: \.self){
                                 Text($0)
@@ -46,7 +50,9 @@ struct MainView: View {
                         }.pickerStyle(.segmented)
                         List(model.books){item in
                             if item.status == "In Progress" && listBookshow == "In Progress"{
-                                NavigationLink(destination: BookDetailView(book: item)) {
+                                Button {
+                                    showDetail.toggle()
+                                } label: {
                                     VStack{
                                         Text(item.title.capitalized)
                                             .bold()
@@ -54,30 +60,48 @@ struct MainView: View {
                                             .font(.caption)
                                     }
                                 }
+                                .sheet(isPresented: $showDetail) {
+                                    BookDetailView(book: item)
+                                        .presentationDetents([.medium,.large], selection: $presentationDetents)
+                                }
+
                             }
                             else if item.status == "Finished" && listBookshow == "Finished"{
-                                NavigationLink(destination: BookDetailView(book: item)) {
+                                Button {
+                                    showDetail.toggle()
+                                } label: {
                                     VStack{
                                         Text(item.title.capitalized)
                                             .bold()
                                         Text(item.author.capitalized)
                                             .font(.caption)
                                     }
+                                }
+                                .sheet(isPresented: $showDetail) {
+                                    BookDetailView(book: item)
+                                        .presentationDetents([.medium,.large], selection: $presentationDetents)
                                 }
                             }
                         }
+                        .scrollContentBackground(.hidden)
                     }
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Book Tracker")
+                .padding()
                 .toolbar{
-                    Button {
-                        showProfileView.toggle()
-                    } label: {
-                        Image(systemName: "person.crop.circle.fill")
-                            .foregroundColor(.black)
-                    }.sheet(isPresented: $showProfileView) {
-                        ProfileView()
+                    HStack(spacing:65){
+                        Spacer()
+                        Text("Book Tracker")
+                            .font(Font.title)
+                            .bold()
+                            .foregroundColor(.white)
+                        Button {
+                            showProfileView.toggle()
+                        } label: {
+                            Image(systemName: "person.crop.circle.fill")
+                                .foregroundColor(Color.white)
+                        }.sheet(isPresented: $showProfileView) {
+                            ProfileView()
+                        }
                     }
                 }
             }

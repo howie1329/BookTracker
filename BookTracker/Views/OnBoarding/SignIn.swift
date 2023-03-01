@@ -14,43 +14,58 @@ struct SignIn: View {
     @Binding var signInStatus:Bool
     var body: some View {
         NavigationView{
-            VStack{
-                Form{
-                    Section{
-                        TextField("Email", text: $email)
-                        TextField("Password",text: $password)
-                    } header: {
-                        Text("Start Here")
+            ZStack{
+                Color("Third")
+                    .ignoresSafeArea()
+                VStack{
+                    Form{
+                        Section{
+                            TextField("Email", text: $email)
+                        } header: {
+                            Text("Email")
+                                .foregroundColor(.white)
+                        }
+                        
+                        Section{
+                            TextField("Password",text: $password)
+                        } header: {
+                            Text("Password")
+                                .foregroundColor(.white)
+                        }
+                        
                     }
-                    
+                    .scrollContentBackground(.hidden)
+                    HStack{
+                        Spacer()
+                        
+                        Button {
+                            model.signInUser(email: email, password: password)
+                        } label: {
+                            Text("Sign In")
+                                .foregroundColor(Color("Third"))
+                                .frame(width:100)
+                        }
+                        .tint(.white)
+                        .buttonStyle(.borderedProminent)
+                        
+                        Spacer()
+                    }
                 }
-                HStack{
-                    Spacer()
-                    
-                    Button {
-                        model.signInUser(email: email, password: password)
-                    } label: {
+                .toolbar{
+                    HStack(spacing:120){
                         Text("Sign In")
+                            .foregroundColor(.white)
+                        Button {
+                            model.signInCondition = .main
+                            signInStatus = false
+                        } label: {
+                            Image(systemName: "x.circle")
+                                .tint(.white)
+                        }
                     }
-                    .foregroundColor(Color("BlueMain"))
-                    .buttonStyle(.borderedProminent)
                     
-                   Spacer()
                 }
             }
-            .toolbar{
-                Button {
-                    model.signInCondition = .main
-                    signInStatus = false
-                } label: {
-                    Image(systemName: "x.circle")
-                        .tint(.black)
-                }
-
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Sign In")
-            
         }
     }
 }

@@ -11,106 +11,126 @@ struct ProfileView: View {
     @EnvironmentObject var model:BookModel
     var body: some View {
         NavigationView{
-            VStack{
-                Text("Stats")
-                    .font(.largeTitle)
-                Grid(horizontalSpacing:10,verticalSpacing: 20){
-                    GridRow{
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(20)
-                                .frame(width: 170,height: 150)
-                                .foregroundColor(.gray)
-                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
-                            VStack(spacing:15){
-                                Text("Goals")
-                                    .bold()
-                                Text("\(model.currentRead) / \(model.goal)")
+            ZStack{
+                Color("Third")
+                    .ignoresSafeArea()
+                VStack(spacing:50){
+                    Text("Stats")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    Grid(horizontalSpacing:10,verticalSpacing: 20){
+                        GridRow{
+                            ZStack{
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .frame(width: 170,height: 150)
+                                    .foregroundColor(Color("Primary"))
+                                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                                VStack(spacing:15){
+                                    Text("Goals")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text("\(model.currentRead) / \(model.goal)")
+                                        .foregroundColor(.white)
+                                }
+                                
+                            }
+                            ZStack{
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .frame(width: 170,height: 150)
+                                    .foregroundColor(Color("Primary"))
+                                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                                VStack(spacing:15){
+                                    Text("In Progress")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text("\(model.progressBook)")
+                                        .foregroundColor(.white)
+                                }
                             }
                             
                         }
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(20)
-                                .frame(width: 170,height: 150)
-                                .foregroundColor(.gray)
-                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
-                            VStack(spacing:15){
-                                Text("In Progress")
-                                    .bold()
-                                Text("\(model.progressBook)")
+                        
+                        GridRow{
+                            ZStack{
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .frame(width: 170,height: 150)
+                                    .foregroundColor(Color("Primary"))
+                                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                                VStack(spacing:15){
+                                    Text("Need To Read")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text("\(model.wantBook)")
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            ZStack{
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .frame(width: 170,height: 150)
+                                    .foregroundColor(Color("Primary"))
+                                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                                VStack(spacing:15){
+                                    Text("Pages Collected")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text("\(model.totalPagesCollected)")
+                                        .foregroundColor(.white)
+                                }
                             }
                         }
-                        
+                        GridRow{
+                            ZStack{
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .frame(width: 170,height: 150)
+                                    .foregroundColor(Color("Primary"))
+                                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                                VStack(spacing:15){
+                                    Text("Not Started")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text("\(model.notStartedBook)")
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            ZStack{
+                                Rectangle()
+                                    .cornerRadius(20)
+                                    .frame(width: 170,height: 150)
+                                    .foregroundColor(Color("Primary"))
+                                    .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
+                                VStack(spacing:15){
+                                    Text("Avg. Rating")
+                                        .foregroundColor(.white)
+                                        .bold()
+                                    Text("\(model.avgBookRating)")
+                                        .foregroundColor(.white)
+                                }
+                            }
+                        }
                     }
                     
-                    GridRow{
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(20)
-                                .frame(width: 170,height: 150)
-                                .foregroundColor(.gray)
-                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
-                            VStack(spacing:15){
-                                Text("Need To Read")
-                                    .bold()
-                                Text("\(model.wantBook)")
-                            }
-                        }
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(20)
-                                .frame(width: 170,height: 150)
-                                .foregroundColor(.gray)
-                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
-                            VStack(spacing:15){
-                                Text("Pages Collected")
-                                    .bold()
-                                Text("\(model.totalPagesCollected)")
-                            }
+                    Spacer()
+                }
+                .padding()
+                .toolbar {
+                    HStack(spacing:110){
+                        Text("\(model.currentUserName)'s Profile")
+                            .foregroundColor(.white)
+                            .bold()
+                        Button {
+                            model.signOutUser()
+                        } label: {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .foregroundColor(.white)
                         }
                     }
-                    GridRow{
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(20)
-                                .frame(width: 170,height: 150)
-                                .foregroundColor(.gray)
-                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
-                            VStack(spacing:15){
-                                Text("Not Started")
-                                    .bold()
-                                Text("\(model.notStartedBook)")
-                            }
-                        }
-                        ZStack{
-                            Rectangle()
-                                .cornerRadius(20)
-                                .frame(width: 170,height: 150)
-                                .foregroundColor(.gray)
-                                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.5), radius: 10, x: -5,y: 5)
-                            VStack(spacing:15){
-                                Text("Avg. Rating")
-                                    .bold()
-                                Text("\(model.avgBookRating)")
-                            }
-                        }
-                    }
+                    
                 }
-                
-                Spacer()
-            }
-            .padding()
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("\(model.currentUserName)'s Profile")
-            .toolbar {
-                Button {
-                    model.signOutUser()
-                } label: {
-                    Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .foregroundColor(.black)
-                }
-
             }
         }
     }

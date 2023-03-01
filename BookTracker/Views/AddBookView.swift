@@ -24,53 +24,82 @@ struct AddBookView: View {
     private let ratingNumbers = [0,1,2,3,4,5]
     
     var body: some View {
-        Spacer()
-        VStack{
-            Text("New Book")
-            Form{
-                Section(header:Text("Title")){
-                    TextField("Book Title", text: $bookTitle)
-                }
-                Section(header:Text("Author")){
-                    TextField("Enter Book Author", text: $bookAuthor)
-                }
-                Section(header:Text("# of Pages")){
-                    TextField("Enter # Of Pages", value: $bookPages,format: .number)
-                }
-                Section(header:Text("Book Description")){
-                    TextField("What's The Book About", text: $bookDescription)
-                }
-                Section(header:Text("Reading Status")){
-                    Picker("Reading Status:", selection: $bookStatus) {
-                        ForEach(readingStatus, id: \.self){
-                            Text($0)
+        ZStack{
+            Color("Third")
+                .ignoresSafeArea()
+            Spacer()
+            VStack{
+                Text("New Book")
+                    .bold()
+                    .font(.title2)
+                    .foregroundColor(.white)
+                
+                Form{
+                    Section{
+                        TextField("Book Title", text: $bookTitle)
+                    } header: {
+                        Text("Title")
+                            .foregroundColor(.white)
+                    }
+                    Section{
+                        TextField("Enter Book Author", text: $bookAuthor)
+                    } header: {
+                        Text("Author")
+                            .foregroundColor(.white)
+                    }
+                    Section{
+                        TextField("Enter # Of Pages", value: $bookPages,format: .number)
+                    } header: {
+                        Text("# of Pages")
+                            .foregroundColor(.white)
+                    }
+                    Section{
+                        TextField("What's The Book About", text: $bookDescription)
+                    } header: {
+                        Text("Book Description")
+                            .foregroundColor(.white)
+                    }
+                    Section{
+                        Picker("Reading Status:", selection: $bookStatus) {
+                            ForEach(readingStatus, id: \.self){
+                                Text($0)
+                            }
                         }
+                    } header: {
+                        Text("Reading Status")
+                            .foregroundColor(.white)
+                    }
+                    
+                    Section{
+                        Picker("Book Rating:", selection: $bookRating) {
+                            ForEach(ratingNumbers, id: \.self){
+                                Text("\($0)")
+                            }
+                        }.pickerStyle(.segmented)
+                    } header: {
+                        Text("Book Rating")
+                            .foregroundColor(.white)
                     }
                 }
-                Section(header:Text("Book Rating")){
-                    Picker("Book Rating:", selection: $bookRating) {
-                        ForEach(ratingNumbers, id: \.self){
-                            Text("\($0)")
-                        }
-                    }.pickerStyle(.segmented)
+                .scrollContentBackground(.hidden)
+                HStack{
+                    Spacer()
+                    Button {
+                        model.createBook(book: Book(id: bookTitle,userID: model.currentUserID, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookRating, description: bookDescription))
+                        model.getAllBooks()
+                        isPresented = false
+                    } label: {
+                        Text("Submit")
+                            .foregroundColor(Color("Third"))
+                    }
+                    .tint(.white)
+                    .buttonStyle(.borderedProminent)
+                    Spacer()
                 }
-                
             }
-            HStack{
-                Spacer()
-                Button {
-                    model.createBook(book: Book(id: bookTitle,userID: model.currentUserID, title: bookTitle, author: bookAuthor, pages: bookPages, status: bookStatus, rating: bookRating, description: bookDescription))
-                    model.getAllBooks()
-                    isPresented = false
-                } label: {
-                    Text("Submit")
-                }
-                .buttonStyle(.borderedProminent)
-                Spacer()
-            }
+            .padding()
+            Spacer()
         }
-        .padding([.bottom])
-        Spacer()
     }
     
 }

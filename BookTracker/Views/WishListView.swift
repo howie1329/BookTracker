@@ -12,28 +12,37 @@ struct WishListView: View {
     @State var showView = false
     var body: some View {
         NavigationView {
-            VStack{
-                List(){
-                    ForEach(model.books){ item in
-                        if item.status == "Want"{
-                            NavigationLink(destination: BookDetailView(book: item)) {
-                                BookListViewRow(item: item)
+            ZStack{
+                Color("Primary")
+                    .ignoresSafeArea()
+                VStack{
+                    List(){
+                        ForEach(model.books){ item in
+                            if item.status == "Want"{
+                                NavigationLink(destination: BookDetailView(book: item)) {
+                                    BookListViewRow(item: item)
+                                }
                             }
+                            
                         }
-                        
                     }
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarTitle("Wish List")
-            .toolbar{
-                Button {
-                    showView.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                        .foregroundColor(.black)
-                }.sheet(isPresented: $showView) {
-                    AddBookView(isPresented: $showView)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    HStack(spacing:100){
+                        Text("Wish List")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .bold()
+                        Button {
+                            showView.toggle()
+                        } label: {
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                        }.sheet(isPresented: $showView) {
+                            AddBookView(isPresented: $showView)
+                        }
+                    }
                 }
             }
         }
