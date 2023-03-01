@@ -39,10 +39,8 @@ struct OnboardView: View {
                             ForEach(tabPic,id: \.self){item in
                                 ZStack{
                                     Rectangle()
-                                        .foregroundColor(.gray)
-                                    VStack{
-                                        Text(item)
-                                    }
+                                        .foregroundColor(.black)
+                                    Image(item).resizable()
                                     
                                 }
                                 .frame(width:350,height: 500)

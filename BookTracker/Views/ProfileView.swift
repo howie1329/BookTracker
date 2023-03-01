@@ -118,7 +118,7 @@ struct ProfileView: View {
                 }
                 .padding()
                 .toolbar {
-                    HStack(spacing:110){
+                    HStack(spacing:70){
                         Text("\(model.currentUserName)'s Profile")
                             .foregroundColor(.white)
                             .bold()
