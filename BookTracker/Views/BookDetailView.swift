@@ -88,7 +88,7 @@ struct BookDetailView: View {
                                 Text("Pages: \(book.pages)")
                                 Text("Book Status: \(book.status)")
                                 Text("Book Rating: \(book.rating)")
-                                Text("Book Description: \(book.description)")
+                                Text("\(book.description.capitalized)")
                             }
                             .foregroundColor(Color.white)
                             Button {
@@ -106,6 +106,7 @@ struct BookDetailView: View {
                             .tint(Color.white)
                             .buttonStyle(.borderedProminent)
                         }
+                        .padding()
                     }
                     
                     
