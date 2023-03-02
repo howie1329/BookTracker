@@ -62,7 +62,8 @@ struct BookDetailView: View {
                                         .foregroundColor(Color.white)
                                 }
                                 Section{
-                                    TextField("Description", text: $editDescription)
+                                    TextEditor(text: $editDescription)
+                                        .frame(height:75)
                                 } header: {
                                     Text("Book Description")
                                         .foregroundColor(Color.white)
@@ -83,30 +84,32 @@ struct BookDetailView: View {
                         }
                         
                     }else{
-                        VStack(alignment:.center,spacing: 25){
-                            VStack(alignment:.leading,spacing:15){
-                                Text("Pages: \(book.pages)")
-                                Text("Book Status: \(book.status)")
-                                Text("Book Rating: \(book.rating)")
-                                Text("\(book.description.capitalized)")
+                        ScrollView{
+                            VStack(alignment:.center,spacing: 25){
+                                VStack(alignment:.leading,spacing:15){
+                                    Text("Pages: \(book.pages)")
+                                    Text("Book Status: \(book.status)")
+                                    Text("Book Rating: \(book.rating)")
+                                    Text("\(book.description.capitalized)")
+                                }
+                                .foregroundColor(Color.white)
+                                Button {
+                                    editPages = book.pages
+                                    editStatus = book.status
+                                    editRating = book.rating
+                                    editDescription = book.description
+                                    editMode.toggle()
+                                } label: {
+                                    Text("Edit Book")
+                                        .foregroundColor(Color("Primary"))
+                                    
+                                    
+                                }
+                                .tint(Color.white)
+                                .buttonStyle(.borderedProminent)
                             }
-                            .foregroundColor(Color.white)
-                            Button {
-                                editPages = book.pages
-                                editStatus = book.status
-                                editRating = book.rating
-                                editDescription = book.description
-                                editMode.toggle()
-                            } label: {
-                                Text("Edit Book")
-                                    .foregroundColor(Color("Primary"))
-                                
-                                
-                            }
-                            .tint(Color.white)
-                            .buttonStyle(.borderedProminent)
-                        }
-                        .padding()
+                            .padding()
+                        }.padding()
                     }
                     
                     
