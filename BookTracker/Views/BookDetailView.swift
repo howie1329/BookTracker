@@ -117,6 +117,7 @@ struct BookDetailView: View {
                 Spacer()
                 Spacer()
             }
+            .padding()
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("\(book.title)'s Details")

@@ -54,7 +54,8 @@ struct AddBookView: View {
                             .foregroundColor(.white)
                     }
                     Section{
-                        TextField("What's The Book About", text: $bookDescription)
+                        TextEditor(text: $bookDescription)
+                            .frame(height:75)
                     } header: {
                         Text("Book Description")
                             .foregroundColor(.white)
