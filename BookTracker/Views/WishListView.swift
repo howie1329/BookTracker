@@ -10,6 +10,10 @@ import SwiftUI
 struct WishListView: View {
     @EnvironmentObject var model:BookModel
     @State var showView = false
+    
+    @State var showDetail = false
+    @State var presentationDetents = PresentationDetent.medium
+    
     var body: some View {
         NavigationView {
             ZStack{
@@ -19,13 +23,23 @@ struct WishListView: View {
                     List(){
                         ForEach(model.books){ item in
                             if item.status == "Want"{
-                                NavigationLink(destination: BookDetailView(book: item)) {
+                                
+                                Button {
+                                    model.currentBookSelected = item
+                                    showDetail.toggle()
+                                } label: {
                                     BookListViewRow(item: item)
                                 }
+                                .sheet(isPresented: $showDetail) {
+                                    BookDetailView(book: model.currentBookSelected)
+                                        .presentationDetents([.medium,.large], selection: $presentationDetents)
+                                }
+                                
                             }
                             
                         }
                     }
+                    .scrollContentBackground(.hidden)
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar{

@@ -21,15 +21,16 @@ struct BookListView: View {
                 Color("Primary")
                     .ignoresSafeArea()
                 VStack{
-                    List(){
+                    List{
                         ForEach(model.books){ item in
                             Button {
+                                model.currentBookSelected = item
                                 showDetail.toggle()
                             } label: {
                                 BookListViewRow(item: item,showStatus: true)
                             }
                             .sheet(isPresented: $showDetail) {
-                                BookDetailView(book: item)
+                                BookDetailView(book: model.currentBookSelected)
                                     .presentationDetents([.medium,.large], selection: $presentationDetents)
                             }
                             

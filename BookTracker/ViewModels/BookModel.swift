@@ -29,6 +29,8 @@ class BookModel: ObservableObject {
     @Published var wantBook:Int = 0
     @Published var totalPagesCollected:Int = 0
     
+    @Published var currentBookSelected:Book = Book(id: "", userID: "", title: "", author: "", pages: 0, status: "", rating: 0, description: "")
+    
     @Published var avgBookRating:Int = 0
     @Published var currentUserID:String = ""
     @Published var signInStatus:Bool = false

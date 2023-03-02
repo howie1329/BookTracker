@@ -51,6 +51,7 @@ struct MainView: View {
                         List(model.books){item in
                             if item.status == "In Progress" && listBookshow == "In Progress"{
                                 Button {
+                                    model.currentBookSelected = item
                                     showDetail.toggle()
                                 } label: {
                                     VStack{
@@ -61,13 +62,14 @@ struct MainView: View {
                                     }
                                 }
                                 .sheet(isPresented: $showDetail) {
-                                    BookDetailView(book: item)
+                                    BookDetailView(book: model.currentBookSelected)
                                         .presentationDetents([.medium,.large], selection: $presentationDetents)
                                 }
 
                             }
                             else if item.status == "Finished" && listBookshow == "Finished"{
                                 Button {
+                                    model.currentBookSelected = item
                                     showDetail.toggle()
                                 } label: {
                                     VStack{
@@ -78,7 +80,7 @@ struct MainView: View {
                                     }
                                 }
                                 .sheet(isPresented: $showDetail) {
-                                    BookDetailView(book: item)
+                                    BookDetailView(book: model.currentBookSelected)
                                         .presentationDetents([.medium,.large], selection: $presentationDetents)
                                 }
                             }
