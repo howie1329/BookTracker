@@ -17,44 +17,12 @@ struct BookListView: View {
     
     @State var searchBar = ""
     
-    @State var showSearch = false
-    @State var isEditing = false
-    
     var body: some View {
         NavigationView {
             ZStack{
                 Color("Primary")
                     .ignoresSafeArea()
                 VStack{
-                    if showSearch{
-                        HStack{
-                            TextField("Search", text: $searchBar)
-                                .padding(7)
-                                .padding(.horizontal,25)
-                                .background(Color.gray)
-                                .cornerRadius(8)
-                                .transition(.move(edge: .top))
-                                .animation(.default)
-                                .onTapGesture {
-                                    isEditing = true
-                                }
-                            
-                            if isEditing {
-                                Button {
-                                    isEditing = false
-                                    showSearch.toggle()
-                                } label: {
-                                    Text("Cancel")
-                                }
-                                .padding(10)
-                                .transition(.move(edge: .trailing))
-                                .animation(.default)
-
-                            }
-                        }
-                        .padding()
-                        
-                    }
                     List{
                         ForEach(model.books){ item in
                             
@@ -81,25 +49,14 @@ struct BookListView: View {
                                     BookDetailView(book: model.currentBookSelected)
                                         .presentationDetents([.medium,.large], selection: $presentationDetents)
                                 }
-                            }
-                            
-                            
-                            
-                            
-                            
+                            }  
                         }
                     }
+                    .searchable(text:$searchBar)
                     .scrollContentBackground(.hidden)
                 }
                 .toolbar{
                     HStack(spacing:100){
-                        Button {
-                            showSearch.toggle()
-                            isEditing = false
-                        } label: {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.white)
-                        }
                         
                         Text("Book List")
                             .font(.title2)
