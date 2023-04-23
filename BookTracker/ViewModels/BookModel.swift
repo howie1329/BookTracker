@@ -46,7 +46,7 @@ class BookModel: ObservableObject {
     func getAllBooks(){
         let db = Firestore.firestore()
         
-        let collection = db.collection("Main")
+        let collection = db.collection("Main").whereField("userID", isEqualTo: "AgxCatYT5CakPBsrv0PsLD1XXM03")
         
         collection.getDocuments { (snapShot, error) in
             
@@ -69,38 +69,37 @@ class BookModel: ObservableObject {
                 for doc in snapShot.documents{
                     let data = doc.data()
                     
-                    if data["userID"] as? String ?? "" == self.currentUserID {
-                        let id = doc.documentID
-                        let userID = data["userID"] as? String ?? ""
-                        let title = data["title"] as? String ?? ""
-                        let author = data["author"] as? String ?? ""
-                        let status = data["status"] as? String ?? ""
-                        let pages = data["pages"] as? Int ?? 0
-                        let rating = data["rating"] as? Int ?? 1
-                        let description = data["description"] as? String ?? ""
-                        
-                        allBooks.append(Book(id: id,userID: userID, title: title, author: author, pages: pages, status: status, rating: rating, description: description))
-                        
-                        self.totalPagesCollected += pages
-                        
-                        ratingTotal += rating
-                        totalbooks += 1
-                        
-                        if status == "Not Started"{
-                            self.bookData[0].bookAmount += 1
-                            self.notStartedBook += 1
-                        }
-                        else if status == "In Progress"{
-                            self.bookData[1].bookAmount += 1
-                            self.progressBook += 1
-                        }
-                        else if status == "Finished"{
-                            self.bookData[2].bookAmount += 1
-                            self.currentRead += 1
-                        }else if status == "Want"{
-                            self.wantBook += 1
-                        }
+                    let id = doc.documentID
+                    let userID = data["userID"] as? String ?? ""
+                    let title = data["title"] as? String ?? ""
+                    let author = data["author"] as? String ?? ""
+                    let status = data["status"] as? String ?? ""
+                    let pages = data["pages"] as? Int ?? 0
+                    let rating = data["rating"] as? Int ?? 1
+                    let description = data["description"] as? String ?? ""
+                    
+                    allBooks.append(Book(id: id,userID: userID, title: title, author: author, pages: pages, status: status, rating: rating, description: description))
+                    
+                    self.totalPagesCollected += pages
+                    
+                    ratingTotal += rating
+                    totalbooks += 1
+                    
+                    if status == "Not Started"{
+                        self.bookData[0].bookAmount += 1
+                        self.notStartedBook += 1
                     }
+                    else if status == "In Progress"{
+                        self.bookData[1].bookAmount += 1
+                        self.progressBook += 1
+                    }
+                    else if status == "Finished"{
+                        self.bookData[2].bookAmount += 1
+                        self.currentRead += 1
+                    }else if status == "Want"{
+                        self.wantBook += 1
+                    }
+                    
                     
                 }
                 self.books = allBooks
